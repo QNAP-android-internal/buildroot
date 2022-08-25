@@ -1,0 +1,4 @@
+config BR2_PACKAGE_EMMC_LIFE
+     bool "emmc_life"
+     help
+       A tool which can detect eMMC life time, spare percentage, and bad block size
