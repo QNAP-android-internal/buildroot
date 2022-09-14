@@ -7,3 +7,4 @@ BOARD_DIR="$(dirname $0)"
 cp ${BOARD_DIR}/test-additions/panel-screen-test.sh ${TARGET_DIR}/usr/bin/panel-screen-test.sh
 cp ${BOARD_DIR}/test-additions/test_buzzer.sh ${TARGET_DIR}/usr/bin/test_buzzer.sh
 cp ${BOARD_DIR}/test-additions/test_lightbar.sh ${TARGET_DIR}/usr/bin/test_lightbar.sh
+cp ${BOARD_DIR}/test-additions/check_emmc.sh ${TARGET_DIR}/usr/bin/check_emmc.sh
