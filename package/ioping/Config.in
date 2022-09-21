@@ -1,0 +1,5 @@
+config BR2_PACKAGE_IOPING
+     bool "ioping"
+     help
+	ioping tool to test memory io speed
+
