@@ -1,3 +1,17 @@
+config BR2_PACKAGE_NETWORK_MANAGER_CLI
+ 	bool "nmcli support"
+ 	select BR2_PACKAGE_READLINE
+ 	help
+ 	  This option enables support for the
+ 	  NetworkManager Command Line Interface
+
+config BR2_PACKAGE_NETWORK_MANAGER_CLI
+ 	bool "nmcli support"
+ 	select BR2_PACKAGE_READLINE
+ 	help
+ 	  This option enables support for the
+ 	  NetworkManager Command Line Interface
+
 config BR2_PACKAGE_NETWORK_MANAGER
 	bool "network-manager"
 	depends on !BR2_STATIC_LIBS # gnutls
