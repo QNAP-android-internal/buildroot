@@ -4,7 +4,7 @@
 SOC=`cat /proc/device-tree/model | cut -d ' ' -f3`
 
 case $SOC in
-	B664)
+	B664|B643)
 		EMMC_NUM="2"
 		;;
 esac
