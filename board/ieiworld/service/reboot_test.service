@@ -1,0 +1,8 @@
+[Unit]
+Description=reboot test
+
+[Service]
+ExecStart=/usr/bin/reboot_test.sh
+
+[Install]
+WantedBy=default.target
