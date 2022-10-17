@@ -21,3 +21,6 @@ cp ${BOARD_DIR}/service/reboot_test.service ${TARGET_DIR}/etc/systemd/system/reb
 mkdir ${TARGET_DIR}/opt/validation/
 mkdir ${TARGET_DIR}/opt/validation/reboot_test
 cp ${BOARD_DIR}/service/booton.txt ${TARGET_DIR}/opt/validation/reboot_test/booton.txt
+
+# copy .wav audo test file
+cp -r ${BOARD_DIR}/test-additions/test_wav ${TARGET_DIR}/opt/validation/
