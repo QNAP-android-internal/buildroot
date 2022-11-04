@@ -17,10 +17,10 @@ cp ${BOARD_DIR}/AP6275S_firmware/clm_bcm43752a2_ag.blob ${TARGET_DIR}/lib/firmwa
 cp ${BOARD_DIR}/AP6275S_firmware/nvram_ap6275s.txt ${TARGET_DIR}/lib/firmware/
 
 # service
-cp ${BOARD_DIR}/service/reboot_test.service ${TARGET_DIR}/etc/systemd/system/reboot_test.service 
+cp ${BOARD_DIR}/test-additions/service/reboot_test.service ${TARGET_DIR}/etc/systemd/system/reboot_test.service 
 mkdir ${TARGET_DIR}/opt/validation/
 mkdir ${TARGET_DIR}/opt/validation/reboot_test
-cp ${BOARD_DIR}/service/booton.txt ${TARGET_DIR}/opt/validation/reboot_test/booton.txt
+cp ${BOARD_DIR}/test-additions/service/booton.txt ${TARGET_DIR}/opt/validation/reboot_test/booton.txt
 
 # copy .wav audo test file
 cp -r ${BOARD_DIR}/test-additions/test_wav ${TARGET_DIR}/opt/validation/
