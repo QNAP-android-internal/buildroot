@@ -1,0 +1,20 @@
+[
+	{	
+		"names": "EMMC",
+		"exec": "/qc/emmc_qc.sh noloop",
+		"statusFile": "/tmp/emmc_qc.txt"
+	},
+	{
+		"names": "USB",
+		"exec": "/qc/usb_qc.sh",
+		"statusFile": "/tmp/usb_qc.txt"
+	},
+	{
+                "names": "MEM",
+                "exec": "/qc/mem_qc.sh 1500",
+                "statusFile": "/tmp/mem_qc.txt"
+        },
+	{
+		"names": "END"
+	}
+]
