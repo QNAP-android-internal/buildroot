@@ -1,0 +1,8 @@
+[Unit]
+Description=qc test
+
+[Service]
+ExecStart=/qc/main.sh
+
+[Install]
+WantedBy=default.target
