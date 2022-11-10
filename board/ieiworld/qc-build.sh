@@ -24,5 +24,3 @@ cp ${BOARD_DIR}/AP6275S_firmware/nvram_ap6275s.txt ${TARGET_DIR}/lib/firmware/
 
 #service
 cp ${BOARD_DIR}/qc-additions/service/qc_test.service ${TARGET_DIR}/etc/systemd/system/qc_test.service
-cp ${TARGET_DIR}/lib/systemd/system/serial-getty@.service ${TARGET_DIR}/lib/systemd/system/serial-getty@tty1.service
-sed -i 's/BindsTo=dev-%i.device/BindsTo=dev-%i/g' ${TARGET_DIR}/lib/systemd/system/serial-getty@tty1.service
