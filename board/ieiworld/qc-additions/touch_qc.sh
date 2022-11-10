@@ -14,6 +14,11 @@ export XDG_RUNTIME_DIR=/run/user/$UID/
 
 ts_test
 
+if [[ "$(echo $?)" == "1" ]];then
+	echo "Failed"
+	exit
+fi
+
 sh -c 'dialog --colors --title "Touch Test" \
 --no-collapse --yesno "Touch Drawing works??" 10 50 \
 <> /dev/tty1 >&0 2>&1'
