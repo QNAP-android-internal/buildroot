@@ -1,4 +1,9 @@
 [
+	{
+                "names": "RTC",
+                "exec": "/qc/rtc_qc.sh bq32k",
+                "statusFile": "/tmp/rtc_qc.txt"
+        },
 	{	
 		"names": "EMMC",
 		"exec": "/qc/emmc_qc.sh noloop",
