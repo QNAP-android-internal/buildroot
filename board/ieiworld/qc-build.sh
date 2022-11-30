@@ -7,6 +7,7 @@ BOARD_DIR="$(dirname $0)"
 mkdir ${TARGET_DIR}/qc
 cp ${BOARD_DIR}/qc-additions/audio_qc.sh ${TARGET_DIR}/qc/audio_qc.sh
 cp ${BOARD_DIR}/qc-additions/buzzer_qc.sh ${TARGET_DIR}/qc/buzzer_qc.sh
+cp ${BOARD_DIR}/qc-additions/camera_qc.sh ${TARGET_DIR}/qc/camera_qc.sh
 cp ${BOARD_DIR}/qc-additions/emmc_qc.sh ${TARGET_DIR}/qc/emmc_qc.sh
 cp ${BOARD_DIR}/qc-additions/lcd_qc.sh ${TARGET_DIR}/qc/lcd_qc.sh
 cp ${BOARD_DIR}/qc-additions/lightbar_qc.sh ${TARGET_DIR}/qc/lightbar_qc.sh
@@ -14,6 +15,7 @@ cp ${BOARD_DIR}/qc-additions/main.sh ${TARGET_DIR}/qc/main.sh
 cp ${BOARD_DIR}/qc-additions/mem_qc.sh ${TARGET_DIR}/qc/mem_qc.sh
 cp ${BOARD_DIR}/qc-additions/rtc_qc.sh ${TARGET_DIR}/qc/rtc_qc.sh
 cp ${BOARD_DIR}/qc-additions/touch_qc.sh ${TARGET_DIR}/qc/touch_qc.sh
+cp ${BOARD_DIR}/qc-additions/uart_qc.sh ${TARGET_DIR}/qc/uart_qc.shh
 cp ${BOARD_DIR}/qc-additions/usb_qc.sh ${TARGET_DIR}/qc/usb_qc.sh
 
 # copy qc config to rootfs
