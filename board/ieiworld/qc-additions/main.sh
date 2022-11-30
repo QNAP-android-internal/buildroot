@@ -14,16 +14,37 @@ do
 	#collect and integrate status files defined in config file;
 	name=`eval jq '.[$i].names' $config_path/config.json |sed s/\"//g`
 	exec=`eval jq '.[$i].exec' $config_path/config.json |sed s/\"//g`
-	
+	checkauto=`eval jq '.[$i].auto' $config_path/config.json |sed s/\"//g`
+
 	if [ $name == "END" ];then
 		break
 	else
-		#echo ${exec}
-		$exec &
-		echo $name: >>/tmp/result.txt
+		if $checkauto;then
+			#echo ${exec}
+			$exec &
+			echo $name: >>/tmp/result.txt
+		fi
 	fi
 	
 	i=$(($i+1))		
+done
+
+i=0
+while true
+do
+	name=`eval jq '.[$i].names' $config_path/config.json |sed s/\"//g`
+	exec=`eval jq '.[$i].exec' $config_path/config.json |sed s/\"//g`
+	checkauto=`eval jq '.[$i].auto' $config_path/config.json |sed s/\"//g`
+
+	if [ $name == "END" ];then
+		break
+	else
+		if ! $checkauto;then
+			$exec
+			echo $name: >>/tmp/result.txt
+		fi
+	fi
+	i=$(($i+1))
 done
 
 i=0

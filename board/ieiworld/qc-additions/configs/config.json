@@ -2,24 +2,34 @@
 	{
                 "names": "RTC",
                 "exec": "/qc/rtc_qc.sh bq32k",
-                "statusFile": "/tmp/rtc_qc.txt"
+                "statusFile": "/tmp/rtc_qc.txt",
+		"auto": "true"
         },
 	{	
 		"names": "EMMC",
 		"exec": "/qc/emmc_qc.sh noloop",
-		"statusFile": "/tmp/emmc_qc.txt"
+		"statusFile": "/tmp/emmc_qc.txt",
+		"auto": "true"
 	},
 	{
 		"names": "USB",
 		"exec": "/qc/usb_qc.sh",
-		"statusFile": "/tmp/usb_qc.txt"
+		"statusFile": "/tmp/usb_qc.txt",
+		"auto": "true"
 	},
 	{
                 "names": "MEM",
                 "exec": "/qc/mem_qc.sh 1500",
-                "statusFile": "/tmp/mem_qc.txt"
+                "statusFile": "/tmp/mem_qc.txt",
+		"auto": "true"
+        },
+	{
+                "names": "CAMERA",
+                "exec": "/qc/camera_qc.sh /dev/video3",
+                "statusFile": "/tmp/camera_qc.txt",
+                "auto": "false"
         },
 	{
 		"names": "END"
-	}
+	}	
 ]
