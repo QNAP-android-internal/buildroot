@@ -1,11 +1,11 @@
 #!/bin/sh
 
-if [ -f /tmp/uart_qc.txt ];then
-        rm /tmp/uart_qc.txt
+if [ -f /tmp/uart_qc_$1.txt ];then
+        rm /tmp/uart_qc_$1.txt
 fi
 
-if [ -f /tmp/uart_tmp.txt ];then
-        rm /tmp/uart_tmp.txt
+if [ -f /tmp/uart_tmp_$1.txt ];then
+        rm /tmp/uart_tmp_$1.txt
 fi
 
 if [ $# -ge 2 ] && [ $2 -gt 0 ];then
@@ -28,7 +28,7 @@ if [ $1 != ttymxc2 ];then
 fi
 #############################################
 
-cat $uart_path > /tmp/uart_tmp.txt &
+cat $uart_path > /tmp/uart_tmp_$1.txt &
 sleep 2
 cat_pid=`ps |grep "cat $uart_path" |grep -v grep | awk  '{print $1}'`
 ps |grep "cat $uart_path" |grep -v grep
@@ -37,12 +37,12 @@ while true
 do
 	echo $test_str > $uart_path
 	sleep 2
-	cat /tmp/uart_tmp.txt |grep $test_str
+	cat /tmp/uart_tmp_$1.txt |grep $test_str
 	if [ $? == 0  ];then
-		echo "pass" > /tmp/uart_qc_txt
+		echo "pass" > /tmp/uart_qc_$1.txt
 		break
 	fi
 done
 kill $cat_pid
-rm /tmp/uart_tmp.txt
+rm /tmp/uart_tmp_$1.txt
 
