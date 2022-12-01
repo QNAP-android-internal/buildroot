@@ -24,6 +24,18 @@
 		"auto": "true"
         },
 	{
+                "names": "UART_ttyUSB0",
+                "exec": "/qc/uart_qc.sh ttyUSB0",
+                "statusFile": "/tmp/uart_qc_ttyUSB0.txt",
+                "auto": "true"
+        },
+	{
+                "names": "UART_ttymxc2",
+                "exec": "/qc/uart_qc.sh ttymxc2",
+                "statusFile": "/tmp/uart_qc_ttymxc2.txt",
+                "auto": "true"
+        },
+	{
                 "names": "CAMERA",
                 "exec": "/qc/camera_qc.sh /dev/video3",
                 "statusFile": "/tmp/camera_qc.txt",
