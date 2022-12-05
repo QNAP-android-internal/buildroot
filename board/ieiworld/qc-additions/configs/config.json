@@ -12,6 +12,18 @@
 		"auto": "true"
 	},
 	{
+                "names": "ETH0",
+                "exec": "/qc/eth_qc.sh eth0",
+                "statusFile": "/tmp/eth_qc_eth0.txt",
+                "auto": "true"
+        },
+	{
+                "names": "ETH1",
+                "exec": "/qc/eth_qc.sh eth1",
+                "statusFile": "/tmp/eth_qc_eth1.txt",
+                "auto": "true"
+        },
+	{
 		"names": "USB",
 		"exec": "/qc/usb_qc.sh",
 		"statusFile": "/tmp/usb_qc.txt",
