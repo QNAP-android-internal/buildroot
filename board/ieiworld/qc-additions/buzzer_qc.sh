@@ -7,9 +7,8 @@ export XDG_RUNTIME_DIR=/run/user/$UID/
 if [ -f /sys/class/backlight/buzzer_pwm/brightness ]; then
     echo "buzzer existed, starting test"
 else
-    echo "Failed"
+    echo "fail" > /tmp/buzzer_qc.txt
 fi
-
 
 for i in $(seq 1 90);
 do
@@ -23,9 +22,9 @@ sh -c 'dialog --colors --title "Buzzer Test" \
 
 BUZZER_RESULTS="$?"
 if [[ "$BUZZER_RESULTS" == '1' ]]; then
-    echo "Failed"
+    echo "fail" > /tmp/buzzer_qc.txt
 elif [[ "$BUZZER_RESULTS" == '0' ]]; then
-    echo "Pass"
+    echo "pass" > /tmp/buzzer_qc.txt
 fi
 
 echo 0 >  /sys/class/backlight/buzzer_pwm/brightness

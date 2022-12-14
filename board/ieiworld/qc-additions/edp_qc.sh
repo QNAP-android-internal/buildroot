@@ -6,7 +6,7 @@ export XDG_RUNTIME_DIR=/run/user/$UID/
 if [ -f /sys/class/i2c-dev/i2c-1/device/1-002d/ ]; then
 	echo "lcd bridge existed, starting test"
 else
-	echo "Failed"
+    echo "fail" > /tmp/edp_qc.txt
 fi
 
 fb-test
@@ -24,9 +24,9 @@ sh -c 'dialog --colors --title "LCD Test" \
 
 LCD_RESULTS="$?"
 if [[ "$LCD_RESULTS" == '1' ]]; then
-        echo "Failed"
+    echo "fail" > /tmp/edp_qc.txt
 elif [[ "$LCD_RESULTS" == '0' ]]; then
-        echo "Pass"
+    echo "pass" > /tmp/edp_qc.txt
 fi
 
 dd if=/dev/zero of=/dev/fb0

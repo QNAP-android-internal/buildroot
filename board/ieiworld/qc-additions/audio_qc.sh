@@ -5,9 +5,9 @@ export XDG_RUNTIME_DIR=/run/user/$UID/
 
 
 if [ -f /sys/class/i2c-dev/i2c-2/device/2-0010/ ]; then
-	echo "codec existed, starting test"
+    echo "codec existed, starting test"
 else
-	echo "Failed"
+    echo "fail" > /tmp/audio_qc.txt
 fi
 
 amixer sset 'Volume Adjustment Smoothing' 'off'  
@@ -28,9 +28,9 @@ sh -c 'dialog --colors --title "Audio Test" \
 
 AUDIO_RESULTS="$?"
 if [[ "$AUDIO_RESULTS" == '1' ]]; then
-        echo "Failed"
+        echo "fail" > /tmp/audio_qc.txt
 elif [[ "$AUDIO_RESULTS" == '0' ]]; then
-        echo "Pass"
+        echo "pass" > /tmp/audio_qc.txt
 fi
 
 kill -9 $REC_PID

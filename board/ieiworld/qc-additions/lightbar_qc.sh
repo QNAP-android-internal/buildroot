@@ -9,13 +9,13 @@ LBAR_PATH2="/sys/bus/i2c/devices/3-0060/leds/"
 if [ -f $LBAR_PATH1/i2c2_led_red_00/brightness ]; then
     echo "lightbar-1 existed, checking lightbar-2"
 else
-    echo "Failed"
+    echo "fail" > /tmp/lightbar_qc.txt
 fi
 
 if [ -f $LBAR_PATH2/i2c4_led_blue_00/brightness ]; then
     echo "lightbar-2 existed, starting test.."
 else
-    echo "Failed"
+    echo "fail" > /tmp/lightbar_qc.txt
 fi
 
 # LBAR 1
@@ -64,9 +64,9 @@ sh -c 'dialog --colors --title "LightBar Test" \
 
 LBAR_RESULTS="$?"
 if [[ "$LBAR_RESULTS" == '1' ]]; then
-        echo "Failed"
+    echo "fail" > /tmp/lightbar_qc.txt
 elif [[ "$LBAR_RESULTS" == '0' ]]; then
-        echo "Pass"
+    echo "pass" > /tmp/lightbar_qc.txt
 fi
 
 dd if=/dev/zero of=/dev/fb0

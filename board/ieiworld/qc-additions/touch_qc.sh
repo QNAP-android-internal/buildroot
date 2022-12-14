@@ -15,7 +15,7 @@ export XDG_RUNTIME_DIR=/run/user/$UID/
 ts_test
 
 if [[ "$(echo $?)" == "1" ]];then
-	echo "Failed"
+    echo "fail" > /tmp/touch_qc.txt
 	exit
 fi
 
@@ -25,9 +25,10 @@ sh -c 'dialog --colors --title "Touch Test" \
 
 TOUCH_RESULTS="$?"
 if [[ "$TOUCH_RESULTS" == '1' ]]; then
-    echo "Failed"
+    echo "fail" > /tmp/touch_qc.txt
+
 elif [[ "$TOUCH_RESULTS" == '0' ]]; then
-    echo "Pass"
+    echo "pass" > /tmp/touch_qc.txt
 fi
 
 sh -c 'clear <> /dev/tty1 >&0 2>&1'
