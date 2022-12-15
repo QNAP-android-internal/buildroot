@@ -3,55 +3,99 @@
                 "names": "RTC",
                 "exec": "/qc/rtc_qc.sh bq32k",
                 "statusFile": "/tmp/rtc_qc.txt",
-		"auto": "true"
+		"auto": "true",
+		"teston": "true"
         },
 	{	
 		"names": "EMMC",
 		"exec": "/qc/emmc_qc.sh noloop",
 		"statusFile": "/tmp/emmc_qc.txt",
-		"auto": "true"
+		"auto": "true",
+		"teston": "true"
 	},
 	{
                 "names": "ETH0",
                 "exec": "/qc/eth_qc.sh eth0",
                 "statusFile": "/tmp/eth_qc_eth0.txt",
-                "auto": "true"
+                "auto": "true",
+		"teston": "true"
         },
 	{
                 "names": "ETH1",
                 "exec": "/qc/eth_qc.sh eth1",
                 "statusFile": "/tmp/eth_qc_eth1.txt",
-                "auto": "true"
+                "auto": "true",
+		"teston": "true"
         },
 	{
 		"names": "USB",
 		"exec": "/qc/usb_qc.sh",
 		"statusFile": "/tmp/usb_qc.txt",
-		"auto": "true"
+		"auto": "true",
+		"teston": "true"
 	},
 	{
                 "names": "MEM",
                 "exec": "/qc/mem_qc.sh 1500",
                 "statusFile": "/tmp/mem_qc.txt",
-		"auto": "true"
+		"auto": "true",
+		"teston": "true"
         },
 	{
                 "names": "UART_ttyUSB0",
                 "exec": "/qc/uart_qc.sh ttyUSB0",
                 "statusFile": "/tmp/uart_qc_ttyUSB0.txt",
-                "auto": "true"
+                "auto": "true",
+		"teston": "true"
         },
 	{
                 "names": "UART_ttymxc2",
                 "exec": "/qc/uart_qc.sh ttymxc2",
                 "statusFile": "/tmp/uart_qc_ttymxc2.txt",
-                "auto": "true"
+                "auto": "true",
+		"teston": "true"
         },
 	{
                 "names": "CAMERA",
                 "exec": "/qc/camera_qc.sh /dev/video3",
                 "statusFile": "/tmp/camera_qc.txt",
-                "auto": "false"
+                "auto": "false",
+		"teston": "true"
+        },
+	{
+                "names": "AUDIO",
+                "exec": "/qc/audio_qc.sh",
+                "statusFile": "/tmp/audio_qc.txt",
+                "auto": "false",
+		"teston": "true"
+        },
+	{
+                "names": "BUZZER",
+                "exec": "/qc/buzzer_qc.sh",
+                "statusFile": "/tmp/buzzer_qc.txt",
+                "auto": "false",
+		"teston": "true"
+        },
+	{
+                "names": "LIGHTBAR",
+                "exec": "/qc/lightbar_qc.sh",
+                "statusFile": "/tmp/lightbar_qc.txt",
+                "auto": "false",
+		"teston": "true"
+        },
+	{
+                "names": "TOUCH",
+                "exec": "/qc/touch_qc.sh",
+                "statusFile": "/tmp/touch_qc.txt",
+                "auto": "false",
+		"teston": "false"
+        },
+	{
+                "names": "EDP",
+                "exec": "/qc/edp_qc.sh",
+                "statusFile": "/tmp/edp_qc.txt",
+                "auto": "false",
+		"teston": "true"
         },
 	{
 		"names": "END"

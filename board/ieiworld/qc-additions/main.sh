@@ -15,14 +15,17 @@ do
 	name=`eval jq '.[$i].names' $config_path/config.json |sed s/\"//g`
 	exec=`eval jq '.[$i].exec' $config_path/config.json |sed s/\"//g`
 	checkauto=`eval jq '.[$i].auto' $config_path/config.json |sed s/\"//g`
+	teston=`eval jq '.[$i].teston' $config_path/config.json |sed s/\"//g`
 
 	if [ $name == "END" ];then
 		break
 	else
-		if $checkauto;then
-			#echo ${exec}
-			$exec &
-			echo $name: >>/tmp/result.txt
+		if $teston;then
+			if $checkauto;then
+				#echo ${exec}
+				$exec &
+				echo $name: >>/tmp/result.txt
+			fi
 		fi
 	fi
 	
@@ -35,13 +38,16 @@ do
 	name=`eval jq '.[$i].names' $config_path/config.json |sed s/\"//g`
 	exec=`eval jq '.[$i].exec' $config_path/config.json |sed s/\"//g`
 	checkauto=`eval jq '.[$i].auto' $config_path/config.json |sed s/\"//g`
+	teston=`eval jq '.[$i].teston' $config_path/config.json |sed s/\"//g`
 
 	if [ $name == "END" ];then
 		break
 	else
-		if ! $checkauto;then
-			$exec
-			echo $name: >>/tmp/result.txt
+		if $teston;then
+			if ! $checkauto;then
+				$exec
+				echo $name: >>/tmp/result.txt
+			fi
 		fi
 	fi
 	i=$(($i+1))
