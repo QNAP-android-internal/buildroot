@@ -14,6 +14,7 @@ cp ${BOARD_DIR}/qc-additions/eth_qc.sh ${TARGET_DIR}/qc/eth_qc.sh
 cp ${BOARD_DIR}/qc-additions/lightbar_qc.sh ${TARGET_DIR}/qc/lightbar_qc.sh
 cp ${BOARD_DIR}/qc-additions/main.sh ${TARGET_DIR}/qc/main.sh
 cp ${BOARD_DIR}/qc-additions/mem_qc.sh ${TARGET_DIR}/qc/mem_qc.sh
+cp ${BOARD_DIR}/qc-additions/modem_qc.sh ${TARGET_DIR}/qc/modem_qc.sh
 cp ${BOARD_DIR}/qc-additions/nor_qc.sh ${TARGET_DIR}/qc/nor_qc.sh
 cp ${BOARD_DIR}/qc-additions/rtc_qc.sh ${TARGET_DIR}/qc/rtc_qc.sh
 cp ${BOARD_DIR}/qc-additions/sd_qc.sh ${TARGET_DIR}/qc/sd_qc.sh
