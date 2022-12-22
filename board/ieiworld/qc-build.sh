@@ -6,6 +6,7 @@ BOARD_DIR="$(dirname $0)"
 # copy test scripts to rootfs
 mkdir ${TARGET_DIR}/qc
 cp ${BOARD_DIR}/qc-additions/audio_qc.sh ${TARGET_DIR}/qc/audio_qc.sh
+cp ${BOARD_DIR}/qc-additions/bt_qc.sh ${TARGET_DIR}/qc/bt_qc.sh
 cp ${BOARD_DIR}/qc-additions/buzzer_qc.sh ${TARGET_DIR}/qc/buzzer_qc.sh
 cp ${BOARD_DIR}/qc-additions/camera_qc.sh ${TARGET_DIR}/qc/camera_qc.sh
 cp ${BOARD_DIR}/qc-additions/edp_qc.sh ${TARGET_DIR}/qc/edp_qc.sh
