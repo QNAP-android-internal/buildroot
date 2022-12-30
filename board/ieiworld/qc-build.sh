@@ -22,6 +22,7 @@ cp ${BOARD_DIR}/qc-additions/sd_qc.sh ${TARGET_DIR}/qc/sd_qc.sh
 cp ${BOARD_DIR}/qc-additions/touch_qc.sh ${TARGET_DIR}/qc/touch_qc.sh
 cp ${BOARD_DIR}/qc-additions/uart_qc.sh ${TARGET_DIR}/qc/uart_qc.sh
 cp ${BOARD_DIR}/qc-additions/usb_qc.sh ${TARGET_DIR}/qc/usb_qc.sh
+cp ${BOARD_DIR}/qc-additions/wifi_qc.sh ${TARGET_DIR}/qc/wifi_qc.sh
 
 # copy qc config to rootfs
 cp -r ${BOARD_DIR}/qc-additions/configs ${TARGET_DIR}/qc/
