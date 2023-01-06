@@ -35,3 +35,6 @@ cp ${BOARD_DIR}/AP6275S_firmware/BCM4362A2_001.003.006.1045.1053.hcd ${TARGET_DI
 
 #service
 cp ${BOARD_DIR}/qc-additions/service/qc_test.service ${TARGET_DIR}/etc/systemd/system/qc_test.service
+
+#mount boot partition
+echo "/dev/mmcblk1p1 /mnt auto rw 0 1" >> ${TARGET_DIR}/etc/fstab
