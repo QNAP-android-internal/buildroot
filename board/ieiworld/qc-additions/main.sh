@@ -8,6 +8,34 @@ if [ -f /tmp/result.txt ];then
 	rm /tmp/result.txt
 fi
 
+#set resolution 1920*1080 when there is hdmi on the board(B643) and without panel
+check_hdmi=false
+check_dsi=false
+i=0
+while true
+do
+	name=`eval jq '.[$i].names' $config_path/config.json |sed s/\"//g`
+	teston=`eval jq '.[$i].teston' $config_path/config.json |sed s/\"//g`
+	if [ $name == "END" ];then
+		break
+	else
+		if [ $name == "HDMI" ] && [ $teston == "true" ];then
+			check_hdmi=true
+		fi
+		if [ $name == "DSI" ] && [ $teston == "true" ];then
+        	        check_dsi=true
+        	fi
+	fi
+	i=$(($i+1))
+done
+
+if $check_hdmi;then
+	if ! $check_dsi;then
+		echo "1920*1080"
+		fbset -fb /dev/fb0 -g 1920 1080 1920 1080 16	
+	fi
+fi
+
 i=0
 while true
 do	
@@ -69,7 +97,6 @@ do
 
 		#echo $dialog_cmd
 		$dialog_cmd >/dev/tty1
-		#break
 		i=0
 		sleep 2
 		continue
