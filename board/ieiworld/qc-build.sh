@@ -12,6 +12,7 @@ cp ${BOARD_DIR}/qc-additions/camera_qc.sh ${TARGET_DIR}/qc/camera_qc.sh
 cp ${BOARD_DIR}/qc-additions/edp_qc.sh ${TARGET_DIR}/qc/edp_qc.sh
 cp ${BOARD_DIR}/qc-additions/emmc_qc.sh ${TARGET_DIR}/qc/emmc_qc.sh
 cp ${BOARD_DIR}/qc-additions/eth_qc.sh ${TARGET_DIR}/qc/eth_qc.sh
+cp ${BOARD_DIR}/qc-additions/hdmi_qc.sh ${TARGET_DIR}/qc/hdmi_qc.sh
 cp ${BOARD_DIR}/qc-additions/lightbar_qc.sh ${TARGET_DIR}/qc/lightbar_qc.sh
 cp ${BOARD_DIR}/qc-additions/main.sh ${TARGET_DIR}/qc/main.sh
 cp ${BOARD_DIR}/qc-additions/mem_qc.sh ${TARGET_DIR}/qc/mem_qc.sh
