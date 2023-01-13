@@ -6,7 +6,7 @@ fi
 
 while true
 do
-	cat /proc/mtd
+	cat /proc/mtd |grep mtd
 	if [ $? == 0 ];then
                 echo pass > /tmp/nor_qc.txt
                 echo "nor pass"
