@@ -1,5 +1,6 @@
 #!/bin/sh
 
+echo "fail" > /tmp/modem_qc.txt
 CNT=0
 CNT_MAX=15
 
