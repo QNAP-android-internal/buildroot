@@ -22,8 +22,8 @@ do
 		break
 	else
 		if [ $i == 10 ];then
-			echo fail > /tmp/wifi_qc.txt
-			exit
+			systemctl stop NetworkManager
+			sleep 2
 		fi
 	fi
 	sleep 1
@@ -62,11 +62,12 @@ if ! $check_connect;then
 fi
 
 iperf_time=60
+check_iperf_time=$(($iperf_time-1))
 iperf_sever_ip=$2
 check_speed=true
 iperf -c $iperf_sever_ip -t$iperf_time -i1 -P8 >/tmp/iperf.txt ;sync
 
-cat /tmp/iperf.txt |grep "\[SUM\] $iperf_time.00"
+cat /tmp/iperf.txt |grep "\[SUM\] $check_iperf_time.00"
 if [ $? == 0 ];then
 	cat /tmp/iperf.txt |grep "sec" | awk  '{print $(NF-1)}' |cut -d "." -f1 >/tmp/iperfspeed.txt
 	while read line
