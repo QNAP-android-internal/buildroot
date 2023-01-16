@@ -81,11 +81,13 @@ do
 	i=$(($i+1))
 done
 
+times=0
 i=0
 while true
 do
 	name=`eval jq '.[$i].names' $config_path/config.json |sed s/\"//g`
 	statusFile=`eval jq '.[$i].statusFile' $config_path/config.json |sed s/\"//g`	
+	teston=`eval jq '.[$i].teston' $config_path/config.json |sed s/\"//g`
 	
 	if [ $name == "END" ];then
 		#dialog output
@@ -98,15 +100,37 @@ do
 		#echo $dialog_cmd
 		$dialog_cmd >/dev/tty1
 		i=0
+		times=$(($times+1))
 		sleep 2
+		if [ $times -gt 150 ];then
+			break
+		fi
 		continue
 	fi
-	status=`cat $statusFile`
-	eval sed -i 's/^$name:.*/$name:$status/g' /tmp/result.txt
-	if [ $status == "pass" ];then
-		echo -n "\Z0\ZB$name:\Z2PASS\n" >>/tmp/dialog_display.txt
-	else
-		echo -n "\Z0\ZB$name:\Z1Failed\n" >>/tmp/dialog_display.txt
+	if $teston;then
+		status=`cat $statusFile`
+		eval sed -i 's/^$name:.*/$name:$status/g' /tmp/result.txt
+		if [ $status == "pass" ];then
+			echo -n "\Z0\ZB$name:\Z2PASS\n" >>/tmp/dialog_display.txt
+		else
+			echo -n "\Z0\ZB$name:\Z1Failed\n" >>/tmp/dialog_display.txt
+		fi
 	fi
 	i=$(($i+1))	
 done
+
+while read line
+do
+	echo $line |grep ":pass"
+	if [ $? != 0 ];then
+		check_result=false
+		break
+	else
+		check_result=true
+	fi
+done </tmp/result.txt
+
+if $check_result;then
+	echo "all pass" >/tmp/pass.txt
+#	/qc/burn_mac.sh
+fi
