@@ -22,11 +22,15 @@ do
 	if $to_check_driver;then
 		if [ $msg_driver == $driver ];then
 			echo pass > /tmp/rtc_qc.txt
+			hwclock -w
+			sleep 1
                         break
 		fi
 	else
 		if $check_dmesg;then
 			echo pass > /tmp/rtc_qc.txt
+			hwclock -w
+                        sleep 1
 			break
 		fi
 	fi
