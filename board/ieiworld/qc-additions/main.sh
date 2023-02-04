@@ -2,7 +2,18 @@
 export TERM=linux
 export XDG_RUNTIME_DIR=/run/user/$UID/
 
-config_path="/qc/configs"
+SOC=`cat /proc/device-tree/model | cut -d ' ' -f3`
+
+case $SOC in
+        B643)
+                config="B643_qc_config.json"
+                ;;
+	B664)
+		config="B664_qc_config.json"
+		;;
+esac
+
+config_path="/qc/configs/$config"
 
 if [ -f /tmp/result.txt ];then
 	rm /tmp/result.txt
@@ -14,8 +25,8 @@ check_dsi=false
 i=0
 while true
 do
-	name=`eval jq '.[$i].names' $config_path/config.json |sed s/\"//g`
-	teston=`eval jq '.[$i].teston' $config_path/config.json |sed s/\"//g`
+	name=`eval jq '.[$i].names' $config_path |sed s/\"//g`
+	teston=`eval jq '.[$i].teston' $config_path |sed s/\"//g`
 	if [ $name == "END" ];then
 		break
 	else
@@ -40,10 +51,10 @@ i=0
 while true
 do	
 	#collect and integrate status files defined in config file;
-	name=`eval jq '.[$i].names' $config_path/config.json |sed s/\"//g`
-	exec=`eval jq '.[$i].exec' $config_path/config.json |sed s/\"//g`
-	checkauto=`eval jq '.[$i].auto' $config_path/config.json |sed s/\"//g`
-	teston=`eval jq '.[$i].teston' $config_path/config.json |sed s/\"//g`
+	name=`eval jq '.[$i].names' $config_path |sed s/\"//g`
+	exec=`eval jq '.[$i].exec' $config_path |sed s/\"//g`
+	checkauto=`eval jq '.[$i].auto' $config_path |sed s/\"//g`
+	teston=`eval jq '.[$i].teston' $config_path |sed s/\"//g`
 
 	if [ $name == "END" ];then
 		break
@@ -63,10 +74,10 @@ done
 i=0
 while true
 do
-	name=`eval jq '.[$i].names' $config_path/config.json |sed s/\"//g`
-	exec=`eval jq '.[$i].exec' $config_path/config.json |sed s/\"//g`
-	checkauto=`eval jq '.[$i].auto' $config_path/config.json |sed s/\"//g`
-	teston=`eval jq '.[$i].teston' $config_path/config.json |sed s/\"//g`
+	name=`eval jq '.[$i].names' $config_path |sed s/\"//g`
+	exec=`eval jq '.[$i].exec' $config_path |sed s/\"//g`
+	checkauto=`eval jq '.[$i].auto' $config_path |sed s/\"//g`
+	teston=`eval jq '.[$i].teston' $config_path |sed s/\"//g`
 
 	if [ $name == "END" ];then
 		break
@@ -85,9 +96,9 @@ times=0
 i=0
 while true
 do
-	name=`eval jq '.[$i].names' $config_path/config.json |sed s/\"//g`
-	statusFile=`eval jq '.[$i].statusFile' $config_path/config.json |sed s/\"//g`	
-	teston=`eval jq '.[$i].teston' $config_path/config.json |sed s/\"//g`
+	name=`eval jq '.[$i].names' $config_path |sed s/\"//g`
+	statusFile=`eval jq '.[$i].statusFile' $config_path |sed s/\"//g`	
+	teston=`eval jq '.[$i].teston' $config_path |sed s/\"//g`
 	
 	if [ $name == "END" ];then
 		#dialog output
