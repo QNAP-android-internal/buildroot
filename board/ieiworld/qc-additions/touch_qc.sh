@@ -12,6 +12,11 @@ export TSLIB_FBDEVICE=/dev/fb0
 export TERM=linux
 export XDG_RUNTIME_DIR=/run/user/$UID/
 
+if [[ "$(cat /proc/device-tree/model | grep "B643")" ]]; then
+	echo "1563 -51 666480 -58 2535 284402 65536 800 1280 0" > /etc/pointercal
+	export TSLIB_CALIBFILE=/etc/pointercal
+fi
+
 ts_test
 
 if [[ "$(echo $?)" == "1" ]];then
