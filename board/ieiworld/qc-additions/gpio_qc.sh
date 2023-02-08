@@ -1,5 +1,7 @@
 #!/bin/sh
 
+while true
+do
 if [[ "$(cat /proc/device-tree/model | grep "B643")" ]]; then
 	echo "prepare to start"
 else
@@ -69,3 +71,6 @@ if [[ "$GET_VAL" != 0 ]]; then
 fi
 
 echo "pass" > /tmp/gpio_qc.txt
+
+sleep 5
+done
