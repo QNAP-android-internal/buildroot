@@ -13,7 +13,7 @@ case $SOC in
 		;;
 esac
 
-config_path="/qc/configs/$config"
+config_path="/mnt/configs/$config"
 
 if [ -f /tmp/result.txt ];then
 	rm /tmp/result.txt

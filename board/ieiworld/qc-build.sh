@@ -28,7 +28,8 @@ cp ${BOARD_DIR}/qc-additions/usb_qc.sh ${TARGET_DIR}/qc/usb_qc.sh
 cp ${BOARD_DIR}/qc-additions/wifi_qc.sh ${TARGET_DIR}/qc/wifi_qc.sh
 
 # copy qc config to rootfs
-cp -r ${BOARD_DIR}/qc-additions/configs ${TARGET_DIR}/qc/
+#cp -r ${BOARD_DIR}/qc-additions/configs ${TARGET_DIR}/qc/
+# decide to put config in boot partition ,board/ieiworld/qc-additions/post-image.sh
 
 # copy AP6275S_firmware
 cp ${BOARD_DIR}/AP6275S_firmware/fw_bcm43752a2_ag* ${TARGET_DIR}/lib/firmware/
