@@ -1,0 +1,124 @@
+[
+	{
+                "names": "RTC",
+                "exec": "/qc/rtc_qc.sh bq32k",
+                "statusFile": "/tmp/rtc_qc.txt",
+		"auto": "true",
+		"teston": "true"
+        },
+	{	
+		"names": "EMMC",
+		"exec": "/qc/emmc_qc.sh noloop",
+		"statusFile": "/tmp/emmc_qc.txt",
+		"auto": "true",
+		"teston": "true"
+	},
+	{
+                "names": "ETH0",
+                "exec": "/qc/eth_qc.sh eth0",
+                "statusFile": "/tmp/eth_qc_eth0.txt",
+                "auto": "true",
+		"teston": "true"
+        },
+	{
+		"names": "USB",
+		"exec": "/qc/usb_qc.sh",
+		"statusFile": "/tmp/usb_qc.txt",
+		"auto": "true",
+		"teston": "true"
+	},
+	{
+                "names": "MEM",
+                "exec": "/qc/mem_qc.sh 3300",
+                "statusFile": "/tmp/mem_qc.txt",
+		"auto": "true",
+		"teston": "true"
+        },
+	{
+                "names": "BT",
+		"exec": "/qc/bt_qc.sh \"BT name\"",
+                "statusFile": "/tmp/bt_qc.txt",
+                "auto": "true",
+                "teston": "true"
+        },
+	{
+                "names": "NOR",
+                "exec": "/qc/nor_qc.sh",
+                "statusFile": "/tmp/nor_qc.txt",
+                "auto": "true",
+                "teston": "true"
+        },
+	{
+                "names": "OTG",
+                "exec": "/qc/otg_qc.sh",
+                "statusFile": "/tmp/otg_qc.txt",
+                "auto": "true",
+                "teston": "true"
+        },
+	{
+                "names": "SD",
+                "exec": "/qc/sd_qc.sh mmcblk2",
+                "statusFile": "/tmp/sd_qc_mmcblk2.txt",
+                "auto": "true",
+                "teston": "true"
+        },
+	{
+                "names": "UART_ttyUSB0",
+                "exec": "/qc/uart_qc.sh ttyUSB0",
+                "statusFile": "/tmp/uart_qc_ttyUSB0.txt",
+                "auto": "true",
+		"teston": "true"
+        },
+	{
+                "names": "WIFI",
+                "exec": "/qc/wifi_qc.sh IEI-ANDROID-Test 192.168.8.188",
+                "statusFile": "/tmp/wifi_qc.txt",
+                "auto": "true",
+                "teston": "true"
+        },
+	{
+                "names": "CAMERA",
+                "exec": "/qc/camera_qc.sh /dev/video3",
+                "statusFile": "/tmp/camera_qc.txt",
+                "auto": "false",
+		"teston": "false"
+        },
+	{
+                "names": "AUDIO",
+                "exec": "/qc/audio_qc.sh",
+                "statusFile": "/tmp/audio_qc.txt",
+                "auto": "false",
+		"teston": "true"
+        },
+	{
+                "names": "BUZZER",
+                "exec": "/qc/buzzer_qc.sh",
+                "statusFile": "/tmp/buzzer_qc.txt",
+                "auto": "false",
+		"teston": "true"
+        },
+	{
+                "names": "LIGHTBAR",
+                "exec": "/qc/lightbar_qc.sh",
+                "statusFile": "/tmp/lightbar_qc.txt",
+                "auto": "false",
+		"teston": "true"
+        },
+	{
+                "names": "TOUCH",
+                "exec": "/qc/touch_qc.sh",
+                "statusFile": "/tmp/touch_qc.txt",
+                "auto": "false",
+		"teston": "true"
+        },
+	{
+                "names": "EDP",
+                "exec": "/qc/edp_qc.sh",
+                "statusFile": "/tmp/edp_qc.txt",
+                "auto": "false",
+		"teston": "true"
+        },
+	{
+		"names": "END"
+	}	
+]
