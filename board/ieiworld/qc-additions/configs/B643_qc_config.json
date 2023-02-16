@@ -6,6 +6,13 @@
 		"auto": "true",
 		"teston": "true"
         },
+	{
+                "names": "MODEM",
+                "exec": "/qc/modem_qc.sh",
+                "statusFile": "/tmp/modem_qc.txt",
+                "auto": "true",
+                "teston": "true"
+        },
 	{	
 		"names": "EMMC",
 		"exec": "/qc/emmc_qc.sh noloop",
@@ -42,6 +49,13 @@
 		"teston": "true"
         },
 	{
+                "names": "BT",
+		"exec": "/qc/bt_qc.sh \"BT_name\"",
+                "statusFile": "/tmp/bt_qc.txt",
+                "auto": "true",
+                "teston": "true"
+        },
+	{
                 "names": "UART_ttyUSB0",
                 "exec": "/qc/uart_qc.sh ttyUSB0",
                 "statusFile": "/tmp/uart_qc_ttyUSB0.txt",
@@ -63,11 +77,32 @@
                 "teston": "true"
         },
 	{
+                "names": "OTG",
+                "exec": "/qc/otg_qc.sh",
+                "statusFile": "/tmp/otg_qc.txt",
+                "auto": "true",
+                "teston": "true"
+        },
+	{
+                "names": "SD",
+                "exec": "/qc/sd_qc.sh mmcblk2",
+                "statusFile": "/tmp/sd_qc_mmcblk2.txt",
+                "auto": "true",
+                "teston": "true"
+        },
+	{
+                "names": "GPIO",
+                "exec": "/qc/gpio_qc.sh",
+                "statusFile": "/tmp/gpio_qc.txt",
+                "auto": "true",
+                "teston": "true"
+        },
+	{
                 "names": "CAMERA",
                 "exec": "/qc/camera_qc.sh /dev/video3",
                 "statusFile": "/tmp/camera_qc.txt",
                 "auto": "false",
-		"teston": "false"
+		"teston": "true"
         },
 	{
                 "names": "AUDIO",
@@ -77,32 +112,25 @@
 		"teston": "false"
         },
 	{
-                "names": "BUZZER",
-                "exec": "/qc/buzzer_qc.sh",
-                "statusFile": "/tmp/buzzer_qc.txt",
-                "auto": "false",
-		"teston": "false"
-        },
-	{
-                "names": "LIGHTBAR",
-                "exec": "/qc/lightbar_qc.sh",
-                "statusFile": "/tmp/lightbar_qc.txt",
-                "auto": "false",
-		"teston": "true"
-        },
-	{
                 "names": "TOUCH",
                 "exec": "/qc/touch_qc.sh",
                 "statusFile": "/tmp/touch_qc.txt",
                 "auto": "false",
-		"teston": "false"
+		"teston": "true"
         },
 	{
-                "names": "EDP",
+                "names": "DSI",
                 "exec": "/qc/edp_qc.sh",
                 "statusFile": "/tmp/edp_qc.txt",
                 "auto": "false",
 		"teston": "true"
+        },
+	{
+                "names": "HDMI",
+                "exec": "/qc/hdmi_qc.sh",
+                "statusFile": "/tmp/hdmi_qc.txt",
+                "auto": "false",
+                "teston": "true"
         },
 	{
 		"names": "END"
