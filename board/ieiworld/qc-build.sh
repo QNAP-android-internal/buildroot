@@ -12,6 +12,7 @@ cp ${BOARD_DIR}/qc-additions/camera_qc.sh ${TARGET_DIR}/qc/camera_qc.sh
 cp ${BOARD_DIR}/qc-additions/edp_qc.sh ${TARGET_DIR}/qc/edp_qc.sh
 cp ${BOARD_DIR}/qc-additions/emmc_qc.sh ${TARGET_DIR}/qc/emmc_qc.sh
 cp ${BOARD_DIR}/qc-additions/eth_qc.sh ${TARGET_DIR}/qc/eth_qc.sh
+cp ${BOARD_DIR}/qc-additions/flash_image.sh ${TARGET_DIR}/qc/flash_image.sh
 cp ${BOARD_DIR}/qc-additions/gpio_qc.sh ${TARGET_DIR}/qc/gpio_qc.sh
 cp ${BOARD_DIR}/qc-additions/hdmi_qc.sh ${TARGET_DIR}/qc/hdmi_qc.sh
 cp ${BOARD_DIR}/qc-additions/lightbar_qc.sh ${TARGET_DIR}/qc/lightbar_qc.sh
@@ -20,6 +21,7 @@ cp ${BOARD_DIR}/qc-additions/mem_qc.sh ${TARGET_DIR}/qc/mem_qc.sh
 cp ${BOARD_DIR}/qc-additions/modem_qc.sh ${TARGET_DIR}/qc/modem_qc.sh
 cp ${BOARD_DIR}/qc-additions/nor_qc.sh ${TARGET_DIR}/qc/nor_qc.sh
 cp ${BOARD_DIR}/qc-additions/otg_qc.sh ${TARGET_DIR}/qc/otg_qc.sh
+cp ${BOARD_DIR}/qc-additions/post-image.sh ${TARGET_DIR}/qc/post-image.sh
 cp ${BOARD_DIR}/qc-additions/rtc_qc.sh ${TARGET_DIR}/qc/rtc_qc.sh
 cp ${BOARD_DIR}/qc-additions/sd_qc.sh ${TARGET_DIR}/qc/sd_qc.sh
 cp ${BOARD_DIR}/qc-additions/touch_qc.sh ${TARGET_DIR}/qc/touch_qc.sh
@@ -39,6 +41,10 @@ cp ${BOARD_DIR}/AP6275S_firmware/BCM4362A2_001.003.006.1045.1053.hcd ${TARGET_DI
 
 #service
 cp ${BOARD_DIR}/qc-additions/service/qc_test.service ${TARGET_DIR}/etc/systemd/system/qc_test.service
+
+#mkdir android image path
+mkdir ${TARGET_DIR}/qc/image
+mkdir ${TARGET_DIR}/qc/image/android
 
 #mount boot partition
 echo "/dev/mmcblk1p1 /mnt auto rw 0 1" >> ${TARGET_DIR}/etc/fstab
