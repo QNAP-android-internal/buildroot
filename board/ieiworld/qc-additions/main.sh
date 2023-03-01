@@ -105,15 +105,26 @@ do
 		dialog_display=`cat /tmp/dialog_display.txt`
 		rm /tmp/dialog_display.txt
 		
-		#echo $dialog_display
-		dialog_cmd="dialog --colors --title 'IEI_Factory_Test' --infobox $dialog_display 50 50 "
+		if [ -f /tmp/flash_progress.txt ];then
+			percentage=`cat /tmp/flash_progress.txt| tail -n1`
+			echo $percentage |grep "copied,"
+			if [ $? == 0 ];then
+				percentage=100
+			fi		
+		else
+			percentage=0
+		fi
 
-		#echo $dialog_cmd
+		echo $dialog_display >/display_debug.txt
+		#dialog_cmd="dialog --colors --title 'IEI_Factory_Test' --infobox $dialog_display 50 50 "
+		dialog_cmd="dialog --colors --title "IEI_Factory_Test" --mixedgauge \n\n\n\n\n\Z5Burning_Android 50 50 $percentage $dialog_display"
+		echo $dialog_cmd >/dialog_debug.txt
 		$dialog_cmd >/dev/tty1
 		i=0
 		times=$(($times+1))
 		sleep 2
-		if [ $times -gt 150 ];then
+		#if [ $times -gt 150 ];then
+		if [ $percentage -ge 100 ];then	
 			break
 		fi
 		continue
@@ -122,13 +133,16 @@ do
 		status=`cat $statusFile`
 		eval sed -i 's/^$name:.*/$name:$status/g' /tmp/result.txt
 		if [ $status == "pass" ];then
-			echo -n "\Z0\ZB$name:\Z2PASS\n" >>/tmp/dialog_display.txt
+			echo -n "\Z2\ZB$name 2 " >>/tmp/dialog_display.txt
 		else
-			echo -n "\Z0\ZB$name:\Z1Failed\n" >>/tmp/dialog_display.txt
+			echo -n "\Z1\ZB$name 1 " >>/tmp/dialog_display.txt
 		fi
 	fi
 	i=$(($i+1))	
 done
+
+sync
+sleep 3
 
 while read line
 do
@@ -144,4 +158,12 @@ done </tmp/result.txt
 if $check_result;then
 	echo "all pass" >/tmp/pass.txt
 #	/qc/burn_mac.sh
+fi
+
+sh -c 'dialog --colors --title "Burning Android Complete" \
+--no-collapse --yesno "Reboot or not?" 10 50 \
+<> /dev/tty1 >&0'
+
+if [ $? == 0 ];then
+	reboot
 fi

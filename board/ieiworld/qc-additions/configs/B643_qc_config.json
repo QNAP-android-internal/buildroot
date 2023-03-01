@@ -15,7 +15,7 @@
         },
 	{	
 		"names": "EMMC",
-		"exec": "/qc/emmc_qc.sh noloop",
+		"exec": "/qc/emmc_qc.sh burn_android",
 		"statusFile": "/tmp/emmc_qc.txt",
 		"auto": "true",
 		"teston": "true"

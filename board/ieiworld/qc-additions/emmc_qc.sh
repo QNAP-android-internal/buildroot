@@ -80,43 +80,43 @@ case $SOC in
                 ;;
 esac
 
-while true
-do
-	EST_TYP_A=`mmc extcsd read /dev/mmcblk$EMMC_NUM | grep "EXT_CSD_DEVICE_LIFE_TIME_EST_TYP_A" | cut -d ':' -f2 | sed s/[[:space:]]//g`
-	EST_TYP_B=`mmc extcsd read /dev/mmcblk$EMMC_NUM | grep "EXT_CSD_DEVICE_LIFE_TIME_EST_TYP_B" | cut -d ':' -f2 | sed s/[[:space:]]//g`
-	EOL_INFO=`mmc extcsd read /dev/mmcblk$EMMC_NUM | grep "EXT_CSD_PRE_EOL_INFO" | cut -d ':' -f2 | sed s/[[:space:]]//g`
-	EOL_STATUS="null"
+EST_TYP_A=`mmc extcsd read /dev/mmcblk$EMMC_NUM | grep "EXT_CSD_DEVICE_LIFE_TIME_EST_TYP_A" | cut -d ':' -f2 | sed s/[[:space:]]//g`
+EST_TYP_B=`mmc extcsd read /dev/mmcblk$EMMC_NUM | grep "EXT_CSD_DEVICE_LIFE_TIME_EST_TYP_B" | cut -d ':' -f2 | sed s/[[:space:]]//g`
+EOL_INFO=`mmc extcsd read /dev/mmcblk$EMMC_NUM | grep "EXT_CSD_PRE_EOL_INFO" | cut -d ':' -f2 | sed s/[[:space:]]//g`
+EOL_STATUS="null"
 
-	checkA=false
-	checkB=false
-	checkEOL=false
+checkA=false
+checkB=false
+checkEOL=false
 
-	if [ -f /tmp/emmc_qc.txt ];then
-		rm /tmp/emmc_qc.txt
+if [ -f /tmp/emmc_qc.txt ];then
+	rm /tmp/emmc_qc.txt
+fi
+
+echo "check eMMC Life Time Estimation A"
+check_life_time A
+echo "##########################################"
+
+echo "check eMMC Life Time Estimation B"
+check_life_time B
+echo "##########################################"
+
+echo "check eMMC Pre EOL information"
+check_EOL_INFO
+echo "##########################################"
+
+#echo "$checkA ; $checkB ; $checkEOL ;"
+burn_android=false
+if [ $1 == "burn_android" ];then
+	burn_android=true
+fi
+
+if $checkA && $checkB && $checkEOL;then
+	echo pass >/tmp/emmc_qc.txt
+	#emmc pass ,burn android
+	if $burn_android ;then
+		/qc/flash_image.sh
 	fi
-
-	echo "check eMMC Life Time Estimation A"
-	check_life_time A
-	echo "##########################################"
-
-	echo "check eMMC Life Time Estimation B"
-	check_life_time B
-	echo "##########################################"
-
-	echo "check eMMC Pre EOL information"
-	check_EOL_INFO
-	echo "##########################################"
-
-	#echo "$checkA ; $checkB ; $checkEOL ;"
-
-	if $checkA && $checkB && $checkEOL;then
-		echo pass >/tmp/emmc_qc.txt
-	else
-		echo fail >/tmp/emmc_qc.txt
-	fi
-	
-	if [ $# != 0 ]&&[ $1 == "noloop" ];then
-		break
-	fi
-	sleep 5
-done
+else
+	echo fail >/tmp/emmc_qc.txt
+fi
