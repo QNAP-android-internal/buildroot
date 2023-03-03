@@ -52,7 +52,7 @@ while true
 do	
 	#collect and integrate status files defined in config file;
 	name=`eval jq '.[$i].names' $config_path |sed s/\"//g`
-	exec=`eval jq '.[$i].exec' $config_path |sed s/\"//g`
+	exec=`eval jq '.[$i].exec' $config_path |sed s/\"//g |sed s/\'/\"/g`
 	checkauto=`eval jq '.[$i].auto' $config_path |sed s/\"//g`
 	teston=`eval jq '.[$i].teston' $config_path |sed s/\"//g`
 
@@ -62,7 +62,7 @@ do
 		if $teston;then
 			if $checkauto;then
 				#echo ${exec}
-				$exec &
+				echo $exec |sh &
 				echo $name: >>/tmp/result.txt
 			fi
 		fi
@@ -75,7 +75,7 @@ i=0
 while true
 do
 	name=`eval jq '.[$i].names' $config_path |sed s/\"//g`
-	exec=`eval jq '.[$i].exec' $config_path |sed s/\"//g`
+	exec=`eval jq '.[$i].exec' $config_path |sed s/\"//g |sed s/\'/\"/g`
 	checkauto=`eval jq '.[$i].auto' $config_path |sed s/\"//g`
 	teston=`eval jq '.[$i].teston' $config_path |sed s/\"//g`
 
@@ -84,7 +84,7 @@ do
 	else
 		if $teston;then
 			if ! $checkauto;then
-				$exec
+				echo $exec |sh
 				echo $name: >>/tmp/result.txt
 			fi
 		fi
