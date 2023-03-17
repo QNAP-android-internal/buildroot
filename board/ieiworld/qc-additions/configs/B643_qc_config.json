@@ -50,7 +50,7 @@
         },
 	{
                 "names": "BT",
-		"exec": "/qc/bt_qc.sh \"BT_name\"",
+		"exec": "/qc/bt_qc.sh 'BT_name'",
                 "statusFile": "/tmp/bt_qc.txt",
                 "auto": "true",
                 "teston": "true"
