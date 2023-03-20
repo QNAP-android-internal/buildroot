@@ -156,14 +156,21 @@ do
 done </tmp/result.txt
 
 if $check_result;then
-	echo "all pass" >/tmp/pass.txt
-#	/qc/burn_mac.sh
+	reboot_msg="Reboot or not?"
+	sh -c 'dialog --title "Burning Android Complete" \
+	--no-collapse --yesno "Burn MAC or not?" 10 50 \
+	<> /dev/tty1 >&0'
+	
+	if [ $? == 0 ];then
+		/qc/burn_mac.sh
+        fi
+else
+	reboot_msg="Some test items fail ,can't brun MAC \n\nreboot or not?"
 fi
 
-sh -c 'dialog --colors --title "Burning Android Complete" \
---no-collapse --yesno "Reboot or not?" 10 50 \
-<> /dev/tty1 >&0'
-
+dialog_reboot="dialog --title \"REBOOT\" --no-collapse --yesno \"$reboot_msg\" 10 50 <> /dev/tty1 >&0"
+echo $dialog_reboot |sh
 if [ $? == 0 ];then
 	reboot
 fi
+
