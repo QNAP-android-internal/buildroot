@@ -43,7 +43,7 @@
 	},
 	{
                 "names": "MEM",
-                "exec": "/qc/mem_qc.sh 1500",
+                "exec": "/qc/mem_qc.sh 3000",
                 "statusFile": "/tmp/mem_qc.txt",
 		"auto": "true",
 		"teston": "true"
@@ -109,7 +109,7 @@
                 "exec": "/qc/audio_qc.sh",
                 "statusFile": "/tmp/audio_qc.txt",
                 "auto": "false",
-		"teston": "false"
+		"teston": "true"
         },
 	{
                 "names": "TOUCH",
