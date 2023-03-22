@@ -17,25 +17,25 @@ else
 fi
 
 # for alc5672
-amixer sset 'IN1 Boost' '2'
-amixer sset 'RECMIXL BST1' 'on'
-amixer sset 'RECMIXR BST1' 'on'
-amixer sset 'Sto1 ADC MIXL ADC1' 'on'
-amixer sset 'Sto1 ADC MIXL ADC2' 'on'
-amixer sset 'Sto1 ADC MIXR ADC1' 'on'
-amixer sset 'Sto1 ADC MIXR ADC2' 'on'
-amixer sset 'Sto2 ADC MIXL ADC1' 'on'
-amixer sset 'Sto2 ADC MIXL ADC2' 'on'
-amixer sset 'Sto2 ADC MIXR ADC1' 'on'
-amixer sset 'Sto2 ADC MIXR ADC2' 'on'
-amixer sset 'Stereo DAC MIXL DAC L1' 'on'
-amixer sset 'Stereo DAC MIXR DAC R1' 'on'
+amixer -c $AUD_CARD sset 'IN1 Boost' '2'
+amixer -c $AUD_CARD sset 'RECMIXL BST1' 'on'
+amixer -c $AUD_CARD sset 'RECMIXR BST1' 'on'
+amixer -c $AUD_CARD sset 'Sto1 ADC MIXL ADC1' 'on'
+amixer -c $AUD_CARD sset 'Sto1 ADC MIXL ADC2' 'on'
+amixer -c $AUD_CARD sset 'Sto1 ADC MIXR ADC1' 'on'
+amixer -c $AUD_CARD sset 'Sto1 ADC MIXR ADC2' 'on'
+amixer -c $AUD_CARD sset 'Sto2 ADC MIXL ADC1' 'on'
+amixer -c $AUD_CARD sset 'Sto2 ADC MIXL ADC2' 'on'
+amixer -c $AUD_CARD sset 'Sto2 ADC MIXR ADC1' 'on'
+amixer -c $AUD_CARD sset 'Sto2 ADC MIXR ADC2' 'on'
+amixer -c $AUD_CARD sset 'Stereo DAC MIXL DAC L1' 'on'
+amixer -c $AUD_CARD sset 'Stereo DAC MIXR DAC R1' 'on'
 
-amixer sset 'HPOVOL MIXL DAC1' 'on'
-amixer sset 'HPOVOL MIXR DAC1' 'on'
-amixer sset 'HPO MIX HPVOL' 'on'
-amixer sset 'PDM1 L Mux' 'Stereo DAC'
-amixer sset 'PDM1 R Mux' 'Stereo DAC'
+amixer -c $AUD_CARD sset 'HPOVOL MIXL DAC1' 'on'
+amixer -c $AUD_CARD sset 'HPOVOL MIXR DAC1' 'on'
+amixer -c $AUD_CARD sset 'HPO MIX HPVOL' 'on'
+amixer -c $AUD_CARD sset 'PDM1 L Mux' 'Stereo DAC'
+amixer -c $AUD_CARD sset 'PDM1 R Mux' 'Stereo DAC'
 
 
 sh -c 'dialog --colors --title "Headset Test" \
@@ -73,7 +73,7 @@ sh -c 'dialog --colors --title "DMIC/Speaker Test" \
 if [ $SOC == "B664" ];then
 	arecord -D hw:$AUD_CARD -f dat | aplay -D hw:$AUD_CARD -f dat &
 elif [ $SOC == "B643" ];then
-        speaker-test -t wav -c 2 -D hw:$AUD_CARD
+        speaker-test -t wav -c 2 -D hw:$AUD_CARD &
 fi
 
 sleep 5
