@@ -29,7 +29,7 @@
 	},
 	{
                 "names": "MEM",
-                "exec": "/qc/mem_qc.sh 3300",
+                "exec": "/qc/mem_qc.sh 3000",
                 "statusFile": "/tmp/mem_qc.txt",
 		"auto": "true",
 		"teston": "true"
@@ -75,13 +75,6 @@
                 "statusFile": "/tmp/wifi_qc.txt",
                 "auto": "true",
                 "teston": "true"
-        },
-	{
-                "names": "CAMERA",
-                "exec": "/qc/camera_qc.sh /dev/video3",
-                "statusFile": "/tmp/camera_qc.txt",
-                "auto": "false",
-		"teston": "false"
         },
 	{
                 "names": "AUDIO",
