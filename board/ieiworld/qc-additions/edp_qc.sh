@@ -9,6 +9,10 @@ else
     echo "fail" > /tmp/edp_qc.txt
 fi
 
+res_org=`fbset |grep geometry |cut -d ' ' -f 1 --complement`
+echo "$res_org" >/tmp/res.txt
+
+fbset -fb /dev/fb0 -g 800 1280 1920 1280 16
 fb-test
 
 for i in $(seq 1 100);
@@ -30,4 +34,5 @@ elif [[ "$LCD_RESULTS" == '0' ]]; then
 fi
 
 dd if=/dev/zero of=/dev/fb0
+fbset -fb /dev/fb0 -g $res_org
 kill -9 $$
