@@ -23,15 +23,18 @@ cd ${UBOOT_DIR}
 # make idtloader.img
 tools/mkimage -n ${SOC} -T rksd -d tpl/u-boot-tpl.bin idbloader.img
 cat spl/u-boot-spl.bin >> idbloader.img
+# make loader bin file
+./make.sh loader
 
 # make boot.img
+cd ${TOP_DIR}
+mkdir -p ${BINARIES_DIR}/bootfs/extlinux
+install -m 0644 ${BOARD_DIR}/extlinux.conf ${BINARIES_DIR}/bootfs/extlinux/extlinux.conf
+install -m 0755 ${BINARIES_DIR}/Image ${BINARIES_DIR}/bootfs/Image
+install -m 0644 ${BINARIES_DIR}/*.dtb ${BINARIES_DIR}/bootfs/
+install -m 0755 ${UBOOT_DIR}/u-boot.itb ${BINARIES_DIR}/u-boot.itb
+install -m 0755 ${UBOOT_DIR}/idbloader.img ${BINARIES_DIR}/idbloader.img
+install -m 0755 ${UBOOT_DIR}/rk*_loader_*.bin ${BINARIES_DIR}/
 cd ${BINARIES_DIR}
 genext2fs -b 32768 -B $((32*1024*1024/32768)) -d bootfs/ -i 8192 -U boot.img
 
-cd ${TOP_DIR}
-mkdir -p ${BINARIES_DIR}/bootfs/extlinux
-install -m 0644 -D ${BOARD_DIR}/extlinux.conf ${BINARIES_DIR}/bootfs/extlinux/extlinux.conf
-install -m 0755 -D ${BINARIES_DIR}/Image ${BINARIES_DIR}/bootfs/
-install -m 0644 -D ${BINARIES_DIR}/*.dtb ${BINARIES_DIR}/bootfs/
-install -m 0755 -D ${UBOOT_DIR}/u-boot.itb ${BINARIES_DIR}/
-install -m 0755 -D ${UBOOT_DIR}/idbloader.img ${BINARIES_DIR}/
