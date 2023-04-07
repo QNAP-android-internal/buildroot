@@ -4,7 +4,7 @@ BOARD_DIR="$(dirname $0)"
 
 
 # copy test scripts to rootfs
-mkdir ${TARGET_DIR}/qc
+mkdir -p ${TARGET_DIR}/qc
 cp ${BOARD_DIR}/qc-additions/audio_qc.sh ${TARGET_DIR}/qc/audio_qc.sh
 cp ${BOARD_DIR}/qc-additions/bt_qc.sh ${TARGET_DIR}/qc/bt_qc.sh
 cp ${BOARD_DIR}/qc-additions/burn_mac.sh ${TARGET_DIR}/qc/burn_mac.sh
@@ -43,9 +43,7 @@ cp ${BOARD_DIR}/AP6275S_firmware/BCM4362A2_001.003.006.1045.1053.hcd ${TARGET_DI
 #service
 cp ${BOARD_DIR}/qc-additions/service/qc_test.service ${TARGET_DIR}/etc/systemd/system/qc_test.service
 
-#mkdir android image path
-mkdir ${TARGET_DIR}/qc/image
-mkdir ${TARGET_DIR}/qc/image/android
-
 #mount boot partition
-echo "/dev/mmcblk1p1 /mnt auto rw 0 1" >> ${TARGET_DIR}/etc/fstab
+if [[ "$(grep -rn "mnt auto rw 0 1" ${TARGET_DIR}/etc/fstab)" == "" ]]; then
+    echo "/dev/mmcblk2p1 /mnt auto rw 0 1" >> ${TARGET_DIR}/etc/fstab
+fi
