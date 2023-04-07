@@ -90,9 +90,22 @@ qc_config_json()
 	echo "\"$qc_config_json\""
 }
 
+boot_scr()
+{
+	echo "\"boot.scr\""
+}
+
+rootfs_image()
+{
+	if grep -Eq "^BR2_TARGET_ROOTFS_CPIO_UIMAGE=y$" ${BR2_CONFIG}; then
+		echo "\"rootfs.cpio.uboot\""
+	fi
+}
+
 main()
 {
-	local FILES="$(dtb_list) $(linux_image), $(qc_config_json)"
+	$HOST_DIR/bin/mkimage -A arm -T script -C none -n "IEI script" -d board/ieiworld/boot.cmd ${BINARIES_DIR}/boot.scr
+    local FILES="$(dtb_list) $(linux_image), $(qc_config_json), $(rootfs_image), $(boot_scr)"
 	echo "############################################################################"
 	echo "FILES=$FILES"
 	echo "############################################################################"
@@ -104,7 +117,7 @@ main()
 	sed -e "s/%FILES%/${FILES}/" \
 		-e "s/%IMXOFFSET%/${IMXOFFSET}/" \
 		-e "s/%UBOOTBIN%/${UBOOTBIN}/" \
-		board/freescale/common/imx/$(genimage_type) > ${GENIMAGE_CFG}
+		board/ieiworld/qc-additions/genimage.cfg > ${GENIMAGE_CFG}
 
 	rm -rf "${GENIMAGE_TMP}"
 
