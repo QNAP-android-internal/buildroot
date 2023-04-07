@@ -16,6 +16,10 @@ cp ${BOARD_DIR}/AP6275S_firmware/fw_bcm43752a2_ag* ${TARGET_DIR}/lib/firmware/
 cp ${BOARD_DIR}/AP6275S_firmware/clm_bcm43752a2_ag.blob ${TARGET_DIR}/lib/firmware/
 cp ${BOARD_DIR}/AP6275S_firmware/nvram_ap6275s.txt ${TARGET_DIR}/lib/firmware/
 
+#copy rlt8822cs_firmware
+cp ${BOARD_DIR}/rlt8822cs_firmware/rtl8822cs_fw ${TARGET_DIR}/lib/firmware/rtlbt/
+cp ${BOARD_DIR}/rlt8822cs_firmware/rtl8822cs_config ${TARGET_DIR}/lib/firmware/rtlbt/
+
 # service
 cp ${BOARD_DIR}/test-additions/service/reboot_test.service ${TARGET_DIR}/etc/systemd/system/reboot_test.service 
 mkdir ${TARGET_DIR}/opt/validation/
