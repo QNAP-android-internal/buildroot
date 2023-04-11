@@ -39,7 +39,7 @@ amixer -c $AUD_CARD sset 'PDM1 R Mux' 'Stereo DAC'
 
 
 sh -c 'dialog --colors --title "Headset Test" \
---no-collapse --yesno "\nStart test when you choose \"Yes\" \nListening about 5 secs..." 10 50 \
+--no-collapse --msgbox "\nStart test when you choose \"OK\" \nListening about 5 secs..." 10 50 \
 <> /dev/tty1 >&0 2>&1'
 
 arecord -D hw:$AUD_CARD -f dat | aplay -D hw:$AUD_CARD -f dat &
@@ -67,7 +67,7 @@ kill -9 $REC_PID
 kill -9 $PLAY_PID
 
 sh -c 'dialog --colors --title "DMIC/Speaker Test" \
---no-collapse --yesno "\nStart test when you choose \"Yes\" \nListening about 5 secs...\nPlease plug-out headset first" 10 50 \
+--no-collapse --msgbox "\nStart test when you choose \"OK\" \nListening about 5 secs...\nPlease plug-out headset first" 10 50 \
 <> /dev/tty1 >&0 2>&1'
 
 if [ $SOC == "B664" ];then
