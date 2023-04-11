@@ -129,6 +129,8 @@ main()
 		--config "${GENIMAGE_CFG}"
 
 	rm -f ${GENIMAGE_CFG}
+	rm -f ${BINARIES_DIR}/sdcard.img.xz
+	xz -9 ${BINARIES_DIR}/sdcard.img
 
 	exit $?
 }
