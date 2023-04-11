@@ -31,7 +31,7 @@ cp ${BOARD_DIR}/qc-additions/usb_qc.sh ${TARGET_DIR}/qc/usb_qc.sh
 cp ${BOARD_DIR}/qc-additions/wifi_qc.sh ${TARGET_DIR}/qc/wifi_qc.sh
 
 # copy qc config to rootfs
-#cp -r ${BOARD_DIR}/qc-additions/configs ${TARGET_DIR}/qc/
+cp -r ${BOARD_DIR}/qc-additions/configs ${TARGET_DIR}/qc/
 # decide to put config in boot partition ,board/ieiworld/qc-additions/post-image.sh
 
 # copy AP6275S_firmware
@@ -42,8 +42,3 @@ cp ${BOARD_DIR}/AP6275S_firmware/BCM4362A2_001.003.006.1045.1053.hcd ${TARGET_DI
 
 #service
 cp ${BOARD_DIR}/qc-additions/service/qc_test.service ${TARGET_DIR}/etc/systemd/system/qc_test.service
-
-#mount boot partition
-if [[ "$(grep -rn "mnt auto rw 0 1" ${TARGET_DIR}/etc/fstab)" == "" ]]; then
-    echo "/dev/mmcblk2p1 /mnt auto rw 0 1" >> ${TARGET_DIR}/etc/fstab
-fi

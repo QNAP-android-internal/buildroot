@@ -105,7 +105,7 @@ rootfs_image()
 main()
 {
 	$HOST_DIR/bin/mkimage -A arm -T script -C none -n "IEI script" -d board/ieiworld/boot.cmd ${BINARIES_DIR}/boot.scr
-    local FILES="$(dtb_list) $(linux_image), $(qc_config_json), $(rootfs_image), $(boot_scr)"
+    local FILES="$(dtb_list) $(linux_image), $(rootfs_image), $(boot_scr)"
 	echo "############################################################################"
 	echo "FILES=$FILES"
 	echo "############################################################################"
