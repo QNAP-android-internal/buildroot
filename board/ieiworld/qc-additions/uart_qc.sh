@@ -28,21 +28,23 @@ if [ $1 != ttymxc2 ];then
 fi
 #############################################
 
-cat $uart_path > /tmp/uart_tmp_$1.txt &
-sleep 2
-cat_pid=`ps |grep "cat $uart_path" |grep -v grep | awk  '{print $1}'`
-ps |grep "cat $uart_path" |grep -v grep
-#echo "cat_pid=$cat_pid"
 while true
 do
-	echo $test_str > $uart_path
+	cat $uart_path > /tmp/uart_tmp_$1.txt &
 	sleep 2
+	cat_pid=`ps |grep "cat $uart_path" |grep -v grep | awk  '{print $1}'`
+	ps |grep "cat $uart_path" |grep -v grep
+
+	# echo string
+	echo $test_str > $uart_path
+	sleep 10
 	cat /tmp/uart_tmp_$1.txt |grep $test_str
 	if [ $? == 0  ];then
 		echo "pass" > /tmp/uart_qc_$1.txt
-		break
+	else
+		echo "fail" > /tmp/uart_qc_$1.txt
 	fi
-done
-kill $cat_pid
-rm /tmp/uart_tmp_$1.txt
 
+	kill $cat_pid
+	rm /tmp/uart_tmp_$1.txt
+done
