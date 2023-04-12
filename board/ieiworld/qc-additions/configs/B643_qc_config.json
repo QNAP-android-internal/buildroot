@@ -133,6 +133,13 @@
                 "teston": "true"
         },
 	{
+                "names": "CPU",
+                "exec": "/qc/cpu_qc.sh",
+                "statusFile": "/tmp/cpu_qc.txt",
+                "auto": "true",
+                "teston": "true"
+        },
+	{
 		"names": "END"
 	}	
 ]

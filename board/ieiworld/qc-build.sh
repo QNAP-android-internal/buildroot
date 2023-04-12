@@ -10,6 +10,7 @@ cp ${BOARD_DIR}/qc-additions/bt_qc.sh ${TARGET_DIR}/qc/bt_qc.sh
 cp ${BOARD_DIR}/qc-additions/burn_mac.sh ${TARGET_DIR}/qc/burn_mac.sh
 cp ${BOARD_DIR}/qc-additions/buzzer_qc.sh ${TARGET_DIR}/qc/buzzer_qc.sh
 cp ${BOARD_DIR}/qc-additions/camera_qc.sh ${TARGET_DIR}/qc/camera_qc.sh
+cp ${BOARD_DIR}/qc-additions/cpu_qc.sh ${TARGET_DIR}/qc/cpu_qc.sh
 cp ${BOARD_DIR}/qc-additions/edp_qc.sh ${TARGET_DIR}/qc/edp_qc.sh
 cp ${BOARD_DIR}/qc-additions/emmc_qc.sh ${TARGET_DIR}/qc/emmc_qc.sh
 cp ${BOARD_DIR}/qc-additions/eth_qc.sh ${TARGET_DIR}/qc/eth_qc.sh
