@@ -18,6 +18,52 @@ config_path="/qc/configs/$config"
 if [ -f /tmp/result.txt ];then
 	rm /tmp/result.txt
 fi
+if [ -f /tmp/testitem.txt ];then
+	rm /tmp/testitem.txt
+fi
+
+#dialog checklist for choosing test items
+i=0
+while true
+do
+	name=`eval jq '.[$i].names' $config_path |sed s/\"//g`
+	if [ $name == "END" ];then
+		break
+	else
+		echo "$name \"\" on " >>/tmp/testitem.txt
+	fi
+	i=$(($i+1))
+done
+
+testitem=`cat /tmp/testitem.txt`
+dialog_cmd="dialog --separate-output --title \"Test items\" --checklist \"Choose test items\" 80 60 2 $testitem  2>/tmp/chosen_items.txt <> /dev/tty1 >&0"
+echo $dialog_cmd |sh
+
+i=0
+while true
+do
+	name=`eval jq '.[$i].names' $config_path |sed s/\"//g`
+	if [ $name == "END" ];then
+		break
+	else
+		matched=false
+		while read line
+		do
+			if [ $line == $name ];then
+				matched=true
+				break
+			fi
+		done < /tmp/chosen_items.txt
+		if $matched;then
+			jq_cmd="jq '.[$i].teston = \"true\"' $config_path >/tmp/tmp.json"
+		else
+			jq_cmd="jq '.[$i].teston = \"false\"' $config_path >/tmp/tmp.json"
+		fi
+		echo $jq_cmd |sh
+		mv /tmp/tmp.json $config_path
+	fi
+	i=$(($i+1))
+done
 
 #set resolution 1920*1080 when there is hdmi on the board(B643) and without panel
 check_hdmi=false
