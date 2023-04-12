@@ -160,10 +160,11 @@ do
 		else
 			percentage=0
 		fi
-
-		echo $dialog_display >/display_debug.txt
-		#dialog_cmd="dialog --colors --title 'IEI_Factory_Test' --infobox $dialog_display 50 50 "
-		dialog_cmd="dialog --colors --title "IEI_Factory_Test" --mixedgauge \n\n\n\n\n\Z5Burning_Android 50 50 $percentage $dialog_display"
+		
+		station="IEI_Factory_Test"
+		#echo $dialog_display >/display_debug.txt
+		dialog_cmd="dialog --colors --title '$station' --infobox $dialog_display 50 50 "
+		#dialog_cmd="dialog --colors --title "IEI_Factory_Test" --mixedgauge \n\n\n\n\n\Z5Burning_Android 50 50 $percentage $dialog_display"
 		echo $dialog_cmd >/dialog_debug.txt
 		$dialog_cmd >/dev/tty1
 		i=0
@@ -179,9 +180,9 @@ do
 		status=`cat $statusFile`
 		eval sed -i 's/^$name:.*/$name:$status/g' /tmp/result.txt
 		if [ $status == "pass" ];then
-			echo -n "\Z2\ZB$name 2 " >>/tmp/dialog_display.txt
+			echo -n "\Z0\ZB$name:\Z2PASS\n" >>/tmp/dialog_display.txt
 		else
-			echo -n "\Z1\ZB$name 1 " >>/tmp/dialog_display.txt
+			echo -n "\Z0\ZB$name:\Z1Failed\n" >>/tmp/dialog_display.txt
 		fi
 	fi
 	i=$(($i+1))	
