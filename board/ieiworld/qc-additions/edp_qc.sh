@@ -17,8 +17,15 @@ fb-test
 
 for i in $(seq 1 100);
 do
-	echo "$i" > /sys/class/backlight/dp_backlight/brightness
-	sleep 0.02
+    if [[ "$(cat /proc/device-tree/model | grep "B643")" ]]; then
+        echo "$i" > /sys/class/backlight/dsi_backlight/brightness
+    elif [[ "$(cat /proc/device-tree/model | grep "B664")" ]]; then
+        echo "$i" > /sys/class/backlight/dp_backlight/brightness
+    else
+        echo "$i" > /sys/class/backlight/dsi_backlight/brightness
+    fi
+
+    sleep 0.02
 done
 
 sleep 0.5
