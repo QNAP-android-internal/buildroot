@@ -8,10 +8,6 @@ if [ -f /tmp/btctl_scan.txt ];then
         rm /tmp/btctl_scan.txt
 fi
 
-if [ -f /tmp/bt_ping.txt ];then
-        rm /tmp/bt_ping.txt
-fi
-
 bt_firmware_path=/lib/firmware/BCM4362A2_001.003.006.1045.1053.hcd
 baudrate=115200
 
@@ -22,43 +18,28 @@ hciconfig hci0 up
 
 bluetoothctl power on
 bluetoothctl agent on
-bluetoothctl scan on >/tmp/btctl_scan.txt &
-
-bt_name="$1"
-echo "$bt_name" > /tmp/bt_name.txt
-
-check_bt_info=false
 while true
 do
-	cat /tmp/btctl_scan.txt |grep "$bt_name"
-	if [ $? == 0 ];then
-		bt_mac=`cat /tmp/btctl_scan.txt |grep "$bt_name" |awk '{print $3}'`
-		bluetoothctl info $bt_mac >/tmp/bt_info.txt
-		cat /tmp/bt_info.txt |grep "Name: $bt_name"
-		if [ $? == 0 ];then
-			check_bt_info=true
-		fi
-	fi	
-	if $check_bt_info;then
-		#hcitool scan for BT Classic to test l2ping
-		hcitool scan > /tmp/bt_hci_scan.txt ;sync
-		sleep 2
-		cat /tmp/bt_hci_scan.txt |grep "$bt_name"
-		if [ $? == 0 ];then
-			#classic
-			l2ping -c10 -t1 $bt_mac >/tmp/bt_ping.txt ;sync
-			cat /tmp/bt_ping.txt |grep "0% loss"
-	                if [ $? == 0 ];then
-        	                echo pass >/tmp/bt_qc.txt
-                	        break
-                	fi
-		else
-			#ble 
-			echo pass >/tmp/bt_qc.txt
-                        break
-		fi
+	bluetoothctl scan on >/tmp/btctl_scan.txt &
+	btctl_scan_pid=`ps |grep "bluetoothctl scan on" |grep -v "grep" |awk '{print $1}'`
+	sleep 5
+	kill $btctl_scan_pid
+	sleep 5
+	cat /tmp/btctl_scan.txt |grep "NEW" |awk '{print $3}'>/tmp/bt_mac.txt
+	bt_mac=`shuf -n1 /tmp/bt_mac.txt`
+	if [[ -z "$bt_mac" ]];then
+		#echo fail >/tmp/bt_qc.txt
+		sleep 5
+		continue
 	fi
-done
 
-btctl_scan_pid=`ps |grep "bluetoothctl scan on" |grep -v "grep" |awk '{print $1}'`
-kill $btctl_scan_pid
+	info_mac=`echo $bt_mac|sed s/:/-/g`
+	bluetoothctl info $bt_mac >/tmp/bt_info.txt
+	cat /tmp/bt_info.txt |grep "Alias: $info_mac"
+	if [ $? == 0 ];then
+		echo pass >/tmp/bt_qc.txt
+	else
+		echo fail >/tmp/bt_qc.txt
+	fi
+	sleep 10
+done
