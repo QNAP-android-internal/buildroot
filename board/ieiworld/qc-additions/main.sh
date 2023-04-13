@@ -60,7 +60,7 @@ do
 			jq_cmd="jq '.[$i].teston = \"false\"' $config_path >/tmp/tmp.json"
 		fi
 		echo $jq_cmd |sh
-		mv /tmp/tmp.json $config_path
+		cp /tmp/tmp.json $config_path
 	fi
 	i=$(($i+1))
 done
@@ -151,16 +151,6 @@ do
 		dialog_display=`cat /tmp/dialog_display.txt`
 		rm /tmp/dialog_display.txt
 		
-		if [ -f /tmp/flash_progress.txt ];then
-			percentage=`cat /tmp/flash_progress.txt| tail -n1`
-			echo $percentage |grep "copied,"
-			if [ $? == 0 ];then
-				percentage=100
-			fi		
-		else
-			percentage=0
-		fi
-		
 		station="IEI_Factory_Test"
 		#echo $dialog_display >/display_debug.txt
 		dialog_cmd="dialog --colors --title '$station' --infobox $dialog_display 50 50 "
@@ -171,9 +161,6 @@ do
 		times=$(($times+1))
 		sleep 2
 		#if [ $times -gt 150 ];then
-		if [ $percentage -ge 100 ];then	
-			break
-		fi
 		continue
 	fi
 	if $teston;then
