@@ -138,6 +138,9 @@ do
 	i=$(($i+1))
 done
 
+dd if=/dev/zero of=/dev/fb0
+sync
+
 times=0
 i=0
 while true
