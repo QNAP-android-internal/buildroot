@@ -14,16 +14,23 @@ do
 	if [[ "$(cat /proc/device-tree/model | grep "B643")" ]]; then
 		PORT_A="Port 3"
 		PORT_B="Port 4"
+		if [[ "$(lsusb -t | grep "$PORT_A")" ]]; then
+			USB_CNT=$(($USB_CNT+1))
+		fi
+
 	elif [[ "$(cat /proc/device-tree/model | grep "B664")" ]]; then
 		PORT_A="Port 1"
 		PORT_B="Port 2"
+		if [[ "$(lsusb -t | grep "$PORT_A" | grep -v "ci_hdrc" | grep -v "hub/7p")" ]]; then
+			USB_CNT=$(($USB_CNT+1))
+		fi
+
 	else
 		PORT_A="Port 3"
 		PORT_B="Port 4"
-	fi
-
-	if [[ "$(lsusb -t | grep "$PORT_A")" ]]; then
-		USB_CNT=$(($USB_CNT+1))
+		if [[ "$(lsusb -t | grep "$PORT_A")" ]]; then
+			USB_CNT=$(($USB_CNT+1))
+		fi
 	fi
 
 	if [[ "$(lsusb -t | grep "$PORT_B")" ]]; then
