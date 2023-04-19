@@ -39,6 +39,8 @@ testitem=`cat /tmp/testitem.txt`
 dialog_cmd="dialog --separate-output --title \"Test items\" --checklist \"Choose test items\" 80 60 2 $testitem  2>/tmp/chosen_items.txt <> /dev/tty1 >&0"
 echo $dialog_cmd |sh
 
+dialog --infobox "Loading... Please wait" 10 30 > /dev/tty1
+
 i=0
 while true
 do
@@ -138,8 +140,7 @@ do
 	i=$(($i+1))
 done
 
-dd if=/dev/zero of=/dev/fb0
-sync
+dialog --infobox "Loading... Please wait" 10 30 > /dev/tty1
 
 times=0
 i=0
