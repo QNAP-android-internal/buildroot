@@ -20,7 +20,7 @@ echo "eth=$eth"
 
 while true 
 do
-	ping -I $eth -c 5 8.8.8.8
+	ping -I $eth -c 5 10.12.56.2
 	if [ $? == 0 ];then
 		echo pass > /tmp/eth_qc_$1.txt
 		break
