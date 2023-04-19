@@ -14,6 +14,20 @@ else
         exit
 fi
 
+while true
+do
+    dialog --title "SN" --inputbox "Enter password:" 10 50 2>/tmp/flash_password.txt <> /dev/tty1 >&0
+    if [ $? == 0 ];then
+        password=`cat /tmp/flash_password.txt`
+        if [[ "$password" == "123" ]];then
+            break
+        else
+            sh -c 'dialog --colors --title "ANDROID FLASHING" \
+            --no-collapse --msgbox "Password error!\nPlease try again" 10 50 \
+            <> /dev/tty1 >&0 2>&1'
+    fi
+fi
+done
 
 if [[ "$(cat /proc/device-tree/model | grep "B643")" ]]; then
         IMAGE_SIZE=13958643712
