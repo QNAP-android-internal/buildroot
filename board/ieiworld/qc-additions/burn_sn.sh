@@ -58,12 +58,13 @@ sn_hex=`echo $sn | od -t x1`
 sn_toburn1=`echo $sn_hex |awk '{print $2,$3,$4,$5}'|sed -e 's# #\\\x#g'`
 sn_toburn2=`echo $sn_hex |awk '{print $6,$7,$8,$9}'|sed -e 's# #\\\x#g'`
 sn_toburn3=`echo $sn_hex |awk '{print $10,$11,$12,$13}'|sed -e 's# #\\\x#g'`
-sn_toburn4=`echo $sn_hex |awk '{print $14,$15,$16,$17}'|sed -e 's# #\\\x#g'`
+sn_toburn4=`echo $sn_hex |awk '{print $14,$15,$16}'|sed -e 's# #\\\x#g'`
 
 echo "printf '\x$sn_toburn1'|dd conv=notrunc of=/sys/bus/nvmem/devices/imx-ocotp0/nvmem bs=4 seek=$((0x38))" >>/tmp/burn_sn_cmd.txt
 echo "printf '\x$sn_toburn2'|dd conv=notrunc of=/sys/bus/nvmem/devices/imx-ocotp0/nvmem bs=4 seek=$((0x39))" >>/tmp/burn_sn_cmd.txt
 echo "printf '\x$sn_toburn3'|dd conv=notrunc of=/sys/bus/nvmem/devices/imx-ocotp0/nvmem bs=4 seek=$((0x3a))" >>/tmp/burn_sn_cmd.txt
-echo "printf '\x$sn_toburn4'|dd conv=notrunc of=/sys/bus/nvmem/devices/imx-ocotp0/nvmem bs=4 seek=$((0x3b))" >>/tmp/burn_sn_cmd.txt
+echo "printf '\x$sn_toburn4\x00'|dd conv=notrunc of=/sys/bus/nvmem/devices/imx-ocotp0/nvmem bs=4 seek=$((0x3b))" >>/tmp/burn_sn_cmd.txt
 
+sync
 cat /tmp/burn_sn_cmd.txt |sh
 sync
