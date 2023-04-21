@@ -106,17 +106,9 @@ check_EOL_INFO
 echo "##########################################"
 
 #echo "$checkA ; $checkB ; $checkEOL ;"
-burn_android=false
-if [ $1 == "burn_android" ];then
-	burn_android=true
-fi
 
 if $checkA && $checkB && $checkEOL;then
 	echo pass >/tmp/emmc_qc.txt
-	#emmc pass ,burn android
-	if $burn_android ;then
-		/qc/flash_image.sh
-	fi
 else
 	echo fail >/tmp/emmc_qc.txt
 fi
