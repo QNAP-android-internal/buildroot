@@ -156,15 +156,33 @@ do
 		rm /tmp/dialog_display.txt
 		
 		station="IEI_Factory_Test"
-		#echo $dialog_display >/display_debug.txt
-		dialog_cmd="dialog --colors --title '$station' --infobox $dialog_display 50 50 "
+		echo $dialog_display >/tmp/display_debug.txt
+		dialog_cmd="dialog --colors --title \"$station\" --msgbox \"$dialog_display\" 50 50 <> /dev/tty1 >&0 &"
 		#dialog_cmd="dialog --colors --title "IEI_Factory_Test" --mixedgauge \n\n\n\n\n\Z5Burning_Android 50 50 $percentage $dialog_display"
-		echo $dialog_cmd >/dialog_debug.txt
-		$dialog_cmd >/dev/tty1
-		i=0
+		echo $dialog_cmd >/tmp/dialog_debug.txt
+		echo $dialog_cmd |sh
+		
+		sleep 4
+		msgbox_pid=`ps |grep msgbox |grep -v grep |awk '{print $1}'`
+		if [[ -n "$msgbox_pid" ]];then
+			kill $msgbox_pid
+			i=0
+			continue
+		else
+			kill $msgbox_pid
+			dialog --title "upload test log" --yesno "Sure you want to upload test log?" 20 50 <> /dev/tty1 >&0
+			if [ $? == 0 ];then
+				#/qc/log_qc.sh
+				break
+			else
+				i=0
+				continue
+			fi
+		fi
+
 		times=$(($times+1))
-		sleep 2
 		#if [ $times -gt 150 ];then
+		i=0
 		continue
 	fi
 	if $teston;then
@@ -178,37 +196,3 @@ do
 	fi
 	i=$(($i+1))	
 done
-
-sync
-sleep 3
-
-while read line
-do
-	echo $line |grep ":pass"
-	if [ $? != 0 ];then
-		check_result=false
-		break
-	else
-		check_result=true
-	fi
-done </tmp/result.txt
-
-if $check_result;then
-	reboot_msg="Reboot or not?"
-	sh -c 'dialog --title "Burning Android Complete" \
-	--no-collapse --yesno "Burn MAC or not?" 10 50 \
-	<> /dev/tty1 >&0'
-	
-	if [ $? == 0 ];then
-		/qc/burn_mac.sh
-        fi
-else
-	reboot_msg="Some test items fail ,can't brun MAC \n\nreboot or not?"
-fi
-
-dialog_reboot="dialog --title \"REBOOT\" --no-collapse --yesno \"$reboot_msg\" 10 50 <> /dev/tty1 >&0"
-echo $dialog_reboot |sh
-if [ $? == 0 ];then
-	reboot
-fi
-
