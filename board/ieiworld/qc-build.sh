@@ -18,6 +18,8 @@ cp ${BOARD_DIR}/qc-additions/flash_image.sh ${TARGET_DIR}/qc/flash_image.sh
 cp ${BOARD_DIR}/qc-additions/gpio_qc.sh ${TARGET_DIR}/qc/gpio_qc.sh
 cp ${BOARD_DIR}/qc-additions/hdmi_qc.sh ${TARGET_DIR}/qc/hdmi_qc.sh
 cp ${BOARD_DIR}/qc-additions/lightbar_qc.sh ${TARGET_DIR}/qc/lightbar_qc.sh
+cp ${BOARD_DIR}/qc-additions/log_qc.sh ${TARGET_DIR}/qc/log_qc.sh
+cp ${BOARD_DIR}/qc-additions/log.txt ${TARGET_DIR}/qc/log.txt
 cp ${BOARD_DIR}/qc-additions/main.sh ${TARGET_DIR}/qc/main.sh
 cp ${BOARD_DIR}/qc-additions/mem_qc.sh ${TARGET_DIR}/qc/mem_qc.sh
 cp ${BOARD_DIR}/qc-additions/modem_qc.sh ${TARGET_DIR}/qc/modem_qc.sh
