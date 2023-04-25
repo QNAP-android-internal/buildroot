@@ -49,7 +49,11 @@ do
 	PORTA_HID_CNT=$(lsusb -t | grep "$PORT_A" | grep "usbhid" | wc -l)
 	PORTB_STORAGE_CNT=$(lsusb -t | grep "$PORT_B" | grep "usb-storage" | wc -l)
 	PORTB_HID_CNT=$(lsusb -t | grep "$PORT_B" | grep "usbhid" | wc -l)
-	PORT_TOTAL=$(($PORTA_STORAGE_CNT+$PORTA_HID_CNT+$PORTB_STORAGE_CNT+$PORTB_HID_CNT))
+
+	# USB_TOUCH for b664
+	PORTC_HID_CNT=$(lsusb -t | grep "Port 3:" | grep "usbhid" | wc -l)
+
+	PORT_TOTAL=$(($PORTA_STORAGE_CNT+$PORTA_HID_CNT+$PORTB_STORAGE_CNT+$PORTB_HID_CNT+$PORTC_HID_CNT))
 
 	STORAGE_CNT=$(lsusb -t | grep "usb-storage" | wc -l)
 	HID_CNT=$(lsusb -t | grep "usbhid" | wc -l)
