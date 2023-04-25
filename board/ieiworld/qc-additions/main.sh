@@ -48,6 +48,7 @@ dialog --infobox "Loading... Please wait" 10 30 > /dev/tty1
 cat /tmp/chosen_items.txt | grep "burn_android"
 if [ $? == 0 ] ;then
 	/qc/flash_image.sh
+	exit 0
 fi
 
 i=0
