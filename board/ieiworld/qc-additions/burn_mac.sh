@@ -131,3 +131,10 @@ echo "printf '$mac_toburn3'|dd conv=notrunc of=/sys/bus/nvmem/devices/imx-ocotp0
 
 cat /tmp/burn_cmd.txt |sh
 sync
+
+reboot_msg="Burning MAC complete, press ok to reboot"
+dialog_reboot="dialog --title \"REBOOT\" --no-collapse --msgbox \"$reboot_msg\" 10 50 <> /dev/tty1 >&0"
+echo $dialog_reboot |sh
+if [ $? == 0 ];then
+	reboot
+fi
