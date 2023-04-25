@@ -22,12 +22,16 @@ if [ -f /tmp/testitem.txt ];then
 	rm /tmp/testitem.txt
 fi
 
+/qc/burn_sn.sh
+/qc/burn_mac.sh
+
 #dialog checklist for choosing test items
 i=0
 while true
 do
 	name=`eval jq '.[$i].names' $config_path |sed s/\"//g`
 	if [ $name == "END" ];then
+		echo "burn_android \"\Z1choose this for burning android\" off " >>/tmp/testitem.txt
 		break
 	else
 		echo "$name \"\" on " >>/tmp/testitem.txt
@@ -36,10 +40,15 @@ do
 done
 
 testitem=`cat /tmp/testitem.txt`
-dialog_cmd="dialog --separate-output --title \"Test items\" --checklist \"Choose test items\" 80 60 2 $testitem  2>/tmp/chosen_items.txt <> /dev/tty1 >&0"
+dialog_cmd="dialog --colors --separate-output --title \"Test items\" --checklist \"Choose test items\" 80 60 2 $testitem  2>/tmp/chosen_items.txt <> /dev/tty1 >&0"
 echo $dialog_cmd |sh
 
 dialog --infobox "Loading... Please wait" 10 30 > /dev/tty1
+
+cat /tmp/chosen_items.txt | grep "burn_android"
+if [ $? == 0 ] ;then
+	/qc/flash_image.sh
+fi
 
 i=0
 while true
@@ -172,7 +181,7 @@ do
 			kill $msgbox_pid
 			dialog --title "upload test log" --yesno "Sure you want to upload test log?" 20 50 <> /dev/tty1 >&0
 			if [ $? == 0 ];then
-				#/qc/log_qc.sh
+				/qc/log_qc.sh
 				break
 			else
 				i=0
