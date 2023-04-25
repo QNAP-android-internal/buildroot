@@ -15,12 +15,8 @@ do
         grep $1 /tmp/sd_tmp.txt
         if [ $? == 0 ];then
                 echo pass > /tmp/sd_qc_$1.txt
-                echo "usd pass"
-                break
         else
                 echo fail > /tmp/sd_qc_$1.txt
                 sleep 2
         fi
 done
-
-rm /tmp/sd_tmp.txt
