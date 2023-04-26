@@ -5,8 +5,5 @@ Serial Number :
 [ VERSION ]
 Kernal version :
 eth0 MAC address :
-WiFi country code : CN
-TW (CN/0)
-(TW/0)
 
 [ FUNCTION ]
