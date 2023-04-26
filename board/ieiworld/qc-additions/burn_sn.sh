@@ -7,6 +7,10 @@ check_sn_pattern()
 	pattern=${SOC}V
 	if [[ $sn =~ ${pattern}[0-9]{3}-[0-9]{6}$ ]];then
 		return 0
+	elif [ $sn == "RDTEST123" ];then
+		dialog --infobox "skip burning sn for RD testing" 10 30 > /dev/tty1
+		sleep 3
+		exit 1
 	else
 		return 1
 	fi	
