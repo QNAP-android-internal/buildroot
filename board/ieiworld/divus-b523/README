@@ -1,0 +1,11 @@
+Step 1: connect USB cable between PC and B523 board
+Step 2: make sure the board is in maskrom mode
+Step 3: execute following instructions to flash images to B523 emmc
+        1) cd output/images
+	2) sudo ../build/rkbin/tools/rkdeveloptool db rk3368h_loader_v2.06.268.bin     
+	3) sudo ../build/rkbin/tools/rkdeveloptool ul rk3368h_loader_v2.06.268.bin     
+	4) sudo ../build/rkbin/tools/rkdeveloptool wl 0x4000 uboot.img                 
+	5) sudo ../build/rkbin/tools/rkdeveloptool wl 0x6000 trust.img                 
+	6) sudo ../build/rkbin/tools/rkdeveloptool wl 0x8000 boot.img                  
+	7) sudo ../build/rkbin/tools/rkdeveloptool wl 0x40000 rootfs.ext2              
+	8) sudo ../build/rkbin/tools/rkdeveloptool gpt parameter.txt

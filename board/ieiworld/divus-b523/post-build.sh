@@ -30,6 +30,7 @@ install -m 0755 ${UBOOT_DIR}/rk*_loader_*.bin ${BINARIES_DIR}/
 install -m 0755 ${UBOOT_DIR}/uboot.img ${BINARIES_DIR}/
 install -m 0755 ${UBOOT_DIR}/trust.img ${BINARIES_DIR}/
 install -m 0644 ${BOARD_DIR}/parameter-buildroot-iei.txt ${BINARIES_DIR}/parameter.txt
+install -m 0444 ${BOARD_DIR}/README ${BINARIES_DIR}/README
 cd ${BINARIES_DIR}
 genext2fs -b 32768 -B $((32*1024*1024/32768)) -d bootfs/ -i 8192 -U boot.img
 
