@@ -180,9 +180,10 @@ do
 			continue
 		else
 			kill $msgbox_pid
-			dialog --title "upload test log" --yesno "Sure you want to upload test log?" 20 50 <> /dev/tty1 >&0
+			dialog --title "upload test log" --yesno "Sure you want to upload test log?" 10 30 <> /dev/tty1 >&0
 			if [ $? == 0 ];then
 				/qc/log_qc.sh
+				dialog --infobox "upload test log complete" 5 30 > /dev/tty1
 				break
 			else
 				i=0
