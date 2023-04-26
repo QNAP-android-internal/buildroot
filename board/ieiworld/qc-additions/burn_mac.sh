@@ -5,6 +5,10 @@ check_mac_pattern()
 	mac=$1
 	if [[ $mac =~ ^[0-9a-f]{12}$ ]];then
 		return 0
+	elif [ $mac == "rdtest123" ];then
+		dialog --infobox "skip burning mac for RD testing" 10 30 > /dev/tty1
+		sleep 3
+		exit 1
 	else
 		return 1
 	fi	
