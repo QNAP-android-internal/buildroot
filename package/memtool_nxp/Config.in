@@ -1,0 +1,4 @@
+config BR2_PACKAGE_MEMTOOL_NXP
+	bool memtool_nxp
+     help
+       memtool_nxp program
