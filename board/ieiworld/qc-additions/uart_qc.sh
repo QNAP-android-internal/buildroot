@@ -11,9 +11,9 @@ fi
 if [ $# -ge 2 ] && [ $2 -gt 0 ];then
 	baudrate=$2
 else
-	boudrate=115200
+	boudrate=9600
 fi
-test_str=thisismyuarttest1234567890
+test_str=123
 
 uart_path=/dev/$1
 echo "uart_path=$uart_path"
@@ -27,6 +27,7 @@ if [ $1 != ttymxc2 ];then
 	stty -F $uart_path $boudrate
 fi
 #############################################
+cat $uart_path > /tmp/uart_tmp_$1.txt &
 
 while true
 do
@@ -37,14 +38,16 @@ do
 
 	# echo string
 	echo $test_str > $uart_path
-	sleep 10
+	sleep 2
 	cat /tmp/uart_tmp_$1.txt |grep $test_str
 	if [ $? == 0  ];then
 		echo "pass" > /tmp/uart_qc_$1.txt
 	else
 		echo "fail" > /tmp/uart_qc_$1.txt
 	fi
-
-	kill $cat_pid
-	rm /tmp/uart_tmp_$1.txt
+	> /tmp/uart_tmp_$1.txt
 done
+
+kill $cat_pid
+rm /tmp/uart_tmp_$1.txt
+
