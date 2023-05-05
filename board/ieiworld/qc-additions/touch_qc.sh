@@ -18,7 +18,7 @@ if [[ "$(cat /proc/device-tree/model | grep "B643")" ]]; then
 elif [[ "$(cat /proc/device-tree/model | grep "B664")" ]]; then
 	echo "5157 13 -624973 22 3318 -1099304 65536 1280 800 0" > /etc/pointercal
 fi
-ts_test
+ts_test_mt
 
 if [[ "$(echo $?)" == "1" ]];then
     echo "fail" > /tmp/touch_qc.txt
