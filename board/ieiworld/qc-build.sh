@@ -46,3 +46,7 @@ cp ${BOARD_DIR}/AP6275S_firmware/BCM4362A2_001.003.006.1045.1053.hcd ${TARGET_DI
 
 #service
 cp ${BOARD_DIR}/qc-additions/service/qc_test.service ${TARGET_DIR}/etc/systemd/system/qc_test.service
+
+# tweaked wav file
+cp ${BOARD_DIR}/qc-additions/wav/Front_Left_new.wav ${TARGET_DIR}/usr/share/sounds/alsa/Front_Left_new.wav
+cp ${BOARD_DIR}/qc-additions/wav/Front_Right_new.wav ${TARGET_DIR}/usr/share/sounds/alsa/Front_Right_new.wav
