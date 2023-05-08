@@ -28,14 +28,12 @@ do
 	cat /tmp/btctl_scan.txt |grep "NEW" |awk '{print $3}'>/tmp/bt_mac.txt
 	bt_mac=`shuf -n1 /tmp/bt_mac.txt`
 	if [[ -z "$bt_mac" ]];then
-		#echo fail >/tmp/bt_qc.txt
 		sleep 5
 		continue
 	fi
 
-	info_mac=`echo $bt_mac|sed s/:/-/g`
 	bluetoothctl info $bt_mac >/tmp/bt_info.txt
-	cat /tmp/bt_info.txt |grep "Alias: $info_mac"
+	cat /tmp/bt_info.txt |grep "Device $mac" |grep -v "not available"
 	if [ $? == 0 ];then
 		echo pass >/tmp/bt_qc.txt
 	else
