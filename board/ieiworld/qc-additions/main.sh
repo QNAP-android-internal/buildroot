@@ -33,6 +33,8 @@ do
 	if [ $name == "END" ];then
 		echo "burn_android \"\Z1choose this for burning android\" off " >>/tmp/testitem.txt
 		break
+	elif [ $name == "NOR" ];then
+		echo "$name \"\" off " >>/tmp/testitem.txt
 	else
 		echo "$name \"\" on " >>/tmp/testitem.txt
 	fi
