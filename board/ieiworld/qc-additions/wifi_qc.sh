@@ -27,13 +27,10 @@ do
 	connmanctl enable wifi 
 	sleep 3
 
-	for i in $(seq 1 10);
-	do
-		connmanctl scan wifi 
-		sleep 2
-		connmanctl services > /tmp/wifiscan_tmp.txt
-		sync
-	done
+	connmanctl scan wifi 
+	sleep 5
+	connmanctl services > /tmp/wifiscan_tmp.txt
+	sync
 
 	cat /tmp/wifiscan_tmp.txt |grep "wifi_"
 	if [ $? == 1 ];then
