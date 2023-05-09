@@ -105,12 +105,19 @@
 		"teston": "true"
         },
 	{
-                "names": "AUDIO",
-                "exec": "/qc/audio_qc.sh",
-                "statusFile": "/tmp/audio_qc.txt",
-                "auto": "false",
+		"names": "HEADSET",
+		"exec": "/qc/audio_qc.sh headset",
+		"statusFile": "/tmp/audio_headset_qc.txt",
+		"auto": "false",
 		"teston": "true"
-        },
+	},
+	{
+		"names": "SPEAKER",
+		"exec": "/qc/audio_qc.sh speaker",
+		"statusFile": "/tmp/audio_speaker_qc.txt",
+		"auto": "false",
+		"teston": "true"
+	},
 	{
                 "names": "TOUCH",
                 "exec": "/qc/touch_qc.sh",
