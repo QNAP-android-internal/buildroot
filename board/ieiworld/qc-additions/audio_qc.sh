@@ -39,7 +39,7 @@ DMIC_loopback_test()
 	#B643 do not have dmic
 	if [ $SOC == "B664" ];then
 		amixer -c 0 sset 'Mono ADC' '127'
-		amixer -c 0 sset 'STO1 ADC Boost Gain' '1'
+		amixer -c 0 sset 'STO1 ADC Boost Gain' '0'
 		arecord -D hw:$AUD_CARD -f dat -c1 | aplay -D hw:$AUD_CARD -f dat -c1 &
 		REC_PID=$(ps | grep arecord | head -1 | awk  '{print $1}')
 		PLAY_PID=$(ps | grep aplay | head -1 | awk  '{print $1}')
@@ -65,8 +65,6 @@ DMIC_loopback_test()
 	fi
 	kill -9 $REC_PID
 	kill -9 $PLAY_PID
-
-	amixer -c 0 sset 'STO1 ADC Boost Gain' '0'
 
 	dd if=/dev/zero of=/dev/fb0
 	kill -9 $$
