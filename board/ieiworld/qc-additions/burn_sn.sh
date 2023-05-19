@@ -5,8 +5,13 @@ check_sn_pattern()
 	sn=$1
 	SOC=`cat /proc/device-tree/model | cut -d ' ' -f3`
 	pattern=${SOC}V
-	if [[ $sn =~ ${pattern}[0-9]{3}-[0-9]{6}$ ]];then
+	#[1-9A-C] means month 1~12
+	if [[ $sn =~ ^${pattern}[0-9]{3}-[0-9]{2}[1-9A-C]{1}[0-9]{3}$ ]];then
+		#sample sn ex:B643V102-22A307
 		return 0
+	elif [[ $sn =~ ^SC[0-9]{2}[1-9A-C]{1}[0-9]{5,6}$ ]];then
+		#ex:SC12A03014 ,length is 10 or 11
+		return 0	
 	elif [ $sn == "RDTEST123" ];then
 		dialog --infobox "skip burning sn for RD testing" 10 30 > /dev/tty1
 		sleep 3
