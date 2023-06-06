@@ -65,6 +65,10 @@ sleep 1
 while true
 do
 	mount.cifs $mount_path /mnt -o domain="ieinet",$login
+	if [ $? != 0 ];then
+		sleep 2
+		continue
+	fi
 	cp $log_path /mnt ;sync
 	ls /mnt/$log_name
 	if [ $? == 0 ];then
