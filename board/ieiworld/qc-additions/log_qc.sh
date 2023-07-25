@@ -12,7 +12,7 @@ case $SOC in
 		;;
 esac
 #login=`cat /qc/log_mount_login.txt`
-login="user=wigcheng,password=Wwwfq5566"
+login="user=ashtest,password=ash@n350"
 
 log_org_path=/qc/log.txt
 
