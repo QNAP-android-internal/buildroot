@@ -12,7 +12,7 @@ case $SOC in
 		;;
 esac
 #login=`cat /qc/log_mount_login.txt`
-login="user=ashtest,password=ash@n350"
+login="user=ash,password=123456"
 
 log_org_path=/qc/log.txt
 
@@ -64,7 +64,7 @@ sleep 1
 
 while true
 do
-	mount.cifs $mount_path /mnt -o domain="ieinet",$login
+	mount.cifs $mount_path /mnt -o domain="172.56.1.55",$login
 	if [ $? != 0 ];then
 		sleep 2
 		continue
