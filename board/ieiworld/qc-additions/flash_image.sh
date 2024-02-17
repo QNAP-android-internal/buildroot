@@ -8,7 +8,7 @@ if [[ $(ls /dev/sda*) ]];then
         mount /dev/sda1 /mnt
 else
         echo "NO USB INSTALLER"
-        sh -c 'dialog --colors --title "ANDROID FLASHING" \
+        sh -c 'dialog --colors --title "IMAGE FLASHING" \
         --no-collapse --msgbox "NO DETECT USB INSTALLER\nPlease reboot and try again" 10 50 \
         <> /dev/tty1 >&0 2>&1'
         exit
@@ -16,13 +16,13 @@ fi
 
 while true
 do
-    dialog --title "SN" --inputbox "Enter password:" 10 50 2>/tmp/flash_password.txt <> /dev/tty1 >&0
+    dialog --title "PASSWORD" --inputbox "Enter password:" 10 50 2>/tmp/flash_password.txt <> /dev/tty1 >&0
     if [ $? == 0 ];then
         password=`cat /tmp/flash_password.txt`
         if [[ "$password" == "123" ]];then
             break
         else
-            sh -c 'dialog --colors --title "ANDROID FLASHING" \
+            sh -c 'dialog --colors --title "IMAGE FLASHING" \
             --no-collapse --msgbox "Password error!\nPlease try again" 10 50 \
             <> /dev/tty1 >&0 2>&1'
     fi
@@ -57,7 +57,7 @@ do
                 percentage=0
         fi
 
-        echo $percentage | dialog --gauge "Flashing Android image, please wait" 10 70 70 > /dev/tty1
+        echo $percentage | dialog --gauge "Flashing OS image, please wait" 10 70 70 > /dev/tty1
         if [ $percentage -ge 100 ];then
                 break
         fi
@@ -66,5 +66,5 @@ do
 done
 
 sync
-echo $percentage | dialog --gauge "Finish! please reboot into Android OS" 10 70 70 > /dev/tty1
+echo $percentage | dialog --gauge "Finish! please reboot into OS" 10 70 70 > /dev/tty1
 umount /mnt

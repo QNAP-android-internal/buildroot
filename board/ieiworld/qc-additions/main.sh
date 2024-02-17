@@ -31,7 +31,7 @@ while true
 do
 	name=`eval jq '.[$i].names' $config_path |sed s/\"//g`
 	if [ $name == "END" ];then
-		echo "burn_android \"\Z1choose this for burning android\" off " >>/tmp/testitem.txt
+		echo "burn_os \"\Z1choose this for burning OS\" off " >>/tmp/testitem.txt
 		break
 	elif [ $name == "NOR" ];then
 		echo "$name \"\" off " >>/tmp/testitem.txt
@@ -47,7 +47,7 @@ echo $dialog_cmd |sh
 
 dialog --infobox "Loading... Please wait" 10 30 > /dev/tty1
 
-cat /tmp/chosen_items.txt | grep "burn_android"
+cat /tmp/chosen_items.txt | grep "burn_os"
 if [ $? == 0 ] ;then
 	/qc/flash_image.sh
 	exit 0
